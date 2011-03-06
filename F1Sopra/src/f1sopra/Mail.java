@@ -45,7 +45,7 @@ public class Mail {
 
             // Lo enviamos.
             Transport t = session.getTransport("smtp");
-            t.connect("fuensa82@gmail.com", "******");
+            t.connect("fuensa82@gmail.com", "******&&&");
             t.sendMessage(message, message.getAllRecipients());
 
             // Cierre.
