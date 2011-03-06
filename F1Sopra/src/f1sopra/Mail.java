@@ -39,7 +39,7 @@ public class Mail {
                 Message.RecipientType.TO,
                 new InternetAddress("victor@fuensalida.com"));
             message.setSubject("Hola");
-            message.setText("Mensajito con Java Mail de los buenos. <b>poque si</b>",
+            message.setText("Mensajito con Java Mail <b>prueba</b>",
                     "ISO-8859-1",
                     "html");
 
