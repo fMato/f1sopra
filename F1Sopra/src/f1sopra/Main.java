@@ -24,8 +24,16 @@ public class Main {
         ArrayList listaUsuarios = DB.getUsuarios();
         for (int i = 0; i < listaUsuarios.size(); i++) {
             String usuario = (String) listaUsuarios.get(i);
-            int puntos = calculaPuntosUsuario(usuario);
-            DB.guardarPuntos(puntos, idCarrera, usuario);
+            try{
+                int puntos = calculaPuntosUsuario(usuario);
+                DB.guardarPuntos(puntos, idCarrera, usuario);
+            }catch(Exception e){
+                System.out.println("ERROR. Mirar log errores, se continua con el resto de usuarios");
+                System.err.println("Error al calcular los puntos del usuario "+usuario);
+                System.err.println("################TRAZA DEL ERROR################");
+                e.printStackTrace(System.err);
+                System.err.println("######################FIN######################");
+            }
         }
     }
 
