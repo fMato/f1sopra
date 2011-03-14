@@ -93,7 +93,7 @@ public class TraspasoApuestas {
 	private static int actualizarApuestaDefinitiva (String carrera) throws SQLException{
 		int result = 0;
 		
-		System.out.println("Comienza la ejecuci�n del m�todo actualizarApuestaDefinitiva");
+		System.out.println("Comienza la ejecución del método actualizarApuestaDefinitiva");
 		
 		//obtener los usuarios participantes de la tabla USUARIOS?? --> APUESTAS
 		//"select USUARIO from APUESTAS"
