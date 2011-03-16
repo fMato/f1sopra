@@ -18,8 +18,8 @@ public interface Puntos {
     static int SEXTO = 8;
     static int SEPTIMO = 6;
     static int OCTAVO = 4;
-    static int NOVENO = 2;
-    static int DECIMO = 1;
+    static int NOVENO = 3;
+    static int DECIMO = 2;
     static int DENTRO = 1;
     static int PODIUM = 25;
     static int TODOS = 125;
