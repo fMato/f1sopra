@@ -44,13 +44,9 @@ public class Main {
         System.out.println("Clasificacion Real:    " + clasifCarrera.toString());
         int puntos = 0;
         puntos += calcularPole(clasifUsuario);
-        int todos = calcularTodos(clasifUsuario);
-        if(todos==0){
-            puntos += calcularPodium(clasifUsuario);
-        }else{
-            puntos +=todos;
-        }
-        puntos += calcularAciertos(clasifUsuario);
+        puntos += calcularTodos(clasifUsuario);
+        puntos += calcularPodium(clasifUsuario);
+        puntos += calcularAciertos(clasifUsuario); //tambien borra del hashmap los aciertos
         puntos += clacularResto(clasifUsuario);
 
         System.out.println("Total puntos: " + puntos);

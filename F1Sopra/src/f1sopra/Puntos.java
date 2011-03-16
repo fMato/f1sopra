@@ -9,8 +9,8 @@ package f1sopra;
  * @author victor
  */
 public interface Puntos {
-    static int POLE = 5;
-    static int PRIMERO = 25;
+    static int POLE = 8;
+    static int PRIMERO = 30;
     static int SEGUNDO = 18;
     static int TERCERO = 15;
     static int CUARTO = 12;
@@ -21,6 +21,6 @@ public interface Puntos {
     static int NOVENO = 2;
     static int DECIMO = 1;
     static int DENTRO = 1;
-    static int PODIUM = 50;
-    static int TODOS = 100;
+    static int PODIUM = 25;
+    static int TODOS = 125;
 }
