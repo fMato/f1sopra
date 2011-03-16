@@ -102,8 +102,6 @@ public class DB {
                 lista.put(Puestos.OCTAVO, (String) rs.getString("octavo"));
                 lista.put(Puestos.NOVENO, (String) rs.getString("noveno"));
                 lista.put(Puestos.DECIMO, (String) rs.getString("decimo"));
-            }else{
-                return null;
             }
             rs.close();
             conexion.close();
