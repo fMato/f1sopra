@@ -40,6 +40,10 @@ public class Main {
     private static int calculaPuntosUsuario(String usuario) {
         System.out.println("Datos de " + usuario);
         HashMap clasifUsuario = DB.getClasificacionUsuario(idCarrera, usuario);
+        if(clasifUsuario==null){
+            System.out.println("El usuario no ha rellenado la clasificacion (solo debe pasar en la primera carrera y hasta que el usuario la rellene)");
+            return 0;
+        }
         System.out.println("Clasificacion Usuario: " + clasifUsuario.toString());
         System.out.println("Clasificacion Real:    " + clasifCarrera.toString());
         int puntos = 0;
