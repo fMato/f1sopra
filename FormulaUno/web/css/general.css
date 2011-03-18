@@ -1,0 +1,230 @@
+@charset "utf-8";
+/* CSS Document */
+/* Autor: fMato */
+
+/* Esto se aplica por defectos a todos los elementos de la página */
+*{color:#000000; font-family:Verdana, Geneva, sans-serif; font-size:12px;}
+
+/* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, se puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD). Lo que se haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+
+/* La eliminación del margen superior resuelve un problema que origina que los márgenes escapen de la etiqueta div contenedora. El margen inferior restante lo mantendrá separado de los elementos de que le sigan.
+Añadir relleno a los lados del elemento dentro de los divs, en lugar de en los divs propiamente dichos, elimina todas las matemáticas de modelo de cuadro. Un div anidada con relleno lateral también puede usarse como método alternativo. */
+h1, h2, h3, h4, h5, h6, p{
+	margin-top: 0;	 
+	padding-right: 15px;
+	padding-left: 15px; 
+}
+
+/* */
+h1{color:#F00}
+
+/* Este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+a img {
+	border: none;
+}
+
+/* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
+a:link {
+	color: #ffffff;
+	text-decoration: underline;
+}
+a:visited {
+	color: #ffffff;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
+	text-decoration: none;
+}
+
+a.linkAdmin:link{
+	color: #000;
+	text-decoration: none;
+	font-weight:bold;
+	}
+a.linkAdmin:hover, a.linkAdmin:active, a.linkAdmin:focus {
+        color: #000;
+	text-decoration: underline;
+	font-weight:bold;
+}
+a.linkAdmin:visited {
+	color: #000;
+	text-decoration: none;
+	font-weight:bold;
+}
+
+a.enlacef1:link{
+    color: #000;
+    font-weight:bold;
+    text-decoration: underline;
+}
+
+a.enlacef1:hover{
+    color: #F00;
+    font-weight:bold;
+    text-decoration: underline;
+}
+
+a.enlacef1:visited{
+    color: #000;
+    font-weight:bold;
+    text-decoration: underline;
+}
+/* ~~ este contenedor de anchura fija rodea a las demás divs~~ */
+.container {
+	width: 900px;
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño */
+	overflow: hidden; /* esta declaración hace que .container conozca dónde terminan las columnas flotantes incluidas y las contenga */
+}
+
+/* ~~ Estas son las columnas para el diseño. ~~ 
+
+1) El relleno sólo se sitúa en la parte superior y/o inferior de las divs. Los elementos situados dentro de estas divs tienen relleno a los lados. Esto le ahorra las "matemáticas de modelo de cuadro". Recuerde que si añade relleno o borde lateral a la div propiamente dicha, éste se añadirá a la anchura que defina para crear la anchura *total*. También puede optar por eliminar el relleno del elemento en la div y colocar una segunda div dentro de ésta sin anchura y el relleno necesario para el diseño deseado.
+
+2) No se asigna margen a las columnas, ya que todas ellas son flotantes. Si es preciso añadir un margen, evite colocarlo en el lado hacia el que se produce la flotación (por ejemplo: un margen derecho en una div configurada para flotar hacia la derecha). En muchas ocasiones, puede usarse relleno como alternativa. En el caso de divs para las que deba incumplirse esta regla, deberá añadir una declaración "display:inline" a la regla de la div para evitar un error que provoca que algunas versiones de Internet Explorer dupliquen el margen.
+
+3) Dado que las clases se pueden usar varias veces en un documento (y que también se pueden aplicar varias clases a un elemento), se ha asignado a las columnas nombres de clases en lugar de ID. Por ejemplo, dos divs de barra lateral podrían apilarse si fuera necesario. Si lo prefiere, éstas pueden cambiarse a ID fácilmente, siempre y cuando las utilice una sola vez por documento.
+
+4) Si prefiere que la navegación esté a la derecha en lugar de a la izquierda, simplemente haga que estas columnas floten en dirección opuesta (todas a la derecha en lugar de todas a la izquierda) y éstas se representarán en orden inverso. No es necesario mover las divs por el código fuente HTML.
+
+*/
+.menuLateral {
+	float: left;
+	width: 170px;
+	/* background: #EADCAE; */
+	padding-bottom: 10px;
+}
+.contenido {
+	background: #DDD;
+	padding: 10px 0;
+	width: 724px;
+	float: left;
+	border-bottom:solid 2px #666666;
+	border-left:solid 1px #666666;
+	border-right:solid 2px #666666;
+	min-height: 450px;
+  	height: auto !important;
+  	height: 450px;
+}
+
+/* ~~ Este selector agrupado da espacio a las listas del área de .content ~~ */
+.contenido ul, .content ol { 
+	padding: 0 0 0 0; /* este relleno reproduce en espejo el relleno derecho de la regla de encabezados y de párrafo incluida más arriba. El relleno se ha colocado en la parte inferior para que el espacio existente entre otros elementos de la lista y a la izquierda cree la sangría. Estos pueden ajustarse como se desee. */
+}
+
+/* ~~ Los estilos de lista de navegación (pueden eliminarse si opta por usar un menú desplegable predefinido como el de Spry) ~~ */
+ul.nav {
+	list-style: none; /* esto elimina el marcador de lista */
+	border-top: 0px solid #666; /* esto crea el borde superior de los vínculos (los demás se sitúan usando un borde inferior en el LI) */
+	margin-bottom: 15px; /* esto crea el espacio entre la navegación en el contenido situado debajo */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* esto crea la separación de los botones */
+}
+ul.nav a, ul.nav a:visited { /* al agrupar estos selectores, se asegurará de que los vínculos mantengan el aspecto de botón incluso después de haber sido visitados */
+	padding: 5px 5px 5px 15px;
+	display: block; /* esto asigna propiedades de bloque al vínculo, lo que provoca que llene todo el LI que lo contiene. Esto provoca que toda el área reaccione a un clic de ratón. */
+	width: 170px;  /*esta anchura hace que se pueda hacer clic en todo el botón para IE6. Puede eliminarse si no es necesario proporcionar compatibilidad con IE6. Calcule la anchura adecuada restando el relleno de este vínculo de la anchura del contenedor de barra lateral. */
+	text-decoration: none;
+        color:#000;
+	/* background: #C6D580; */
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fondo y del texto tanto para usuarios que naveguen con ratón como para los que lo hagan con teclado */
+	/* background: #ADB96E; */
+	color: #F00;
+	font-weight:bold;
+	font-size:11px;
+}
+
+ul.nav a { /* esto cambia el color de fondo y del texto de los elementos del menú cuando nadie navega sobre él */
+	/* background: #ADB96E; */
+	color: #000;
+	font-weight:bold;
+	font-size:11px;
+}
+/* ~~ clases float/clear varias ~~ */
+.fltrt {  /* esta clase puede utilizarse para que un elemento flote en la parte derecha de la página. El elemento flotante debe preceder al elemento junto al que debe aparecer en la página. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* esta clase puede utilizarse para que un elemento flote en la parte izquierda de la página. El elemento flotante debe preceder al elemento junto al que debe aparecer en la página. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* esta clase puede situarse en una <br /> o div vacía como elemento final tras la última div flotante (dentro de #container) si se elimina overflow:hidden en .container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+input, textarea{
+	color:#000000;
+	font-size:9px;
+	}
+p label.loginLabel{
+	width:100px;
+	float:left;
+	}
+p label.posicionesLabel{
+	width:150px;
+	float:left;
+	}
+p label.apuestaAnteriorLabel{
+	width:90px;
+	float:left;
+	}
+#semiTransp2{
+    overflow: auto;
+    color:#fff;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:12px;
+    font-weight: bold;
+    }
+#semiTransp{
+    padding: 10px;
+    border:solid 1px #000;
+    position: absolute;
+    width:350px;
+    height: 150px;
+    overflow: auto;
+    left: 50%;
+    top: 50%;
+    background-color: #000;
+    color: #fff;
+    filter: Alpha(Opacity=90);
+    -moz-opacity: 0.90;
+    opacity: 0.90;
+    margin-left: -175px;
+    margin-top: -75px;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:12px;
+    text-align: center;
+    display: none;
+    z-index: 100;
+    
+}
+* html #semiTransp {
+   filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+ }
+ #tablaGeneral{
+     border-collapse:collapse;
+}
+#tablaGeneral td{
+     border: 1px solid #000000;
+}
+.pie{
+    text-align: center;
+    color: #666666;
+    padding: 5px;
+}
+.pie a{
+    color: #666666;
+    text-decoration: underline;
+}
+.pie a:hover{
+    color: #FF9900;
+    text-decoration: underline;
+}
