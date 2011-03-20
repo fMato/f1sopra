@@ -15,6 +15,15 @@ long antiCache=System.currentTimeMillis();
         f.action="./hacerLogin.f1?antiCache=<%=antiCache%>";
         f.submit();
     }
+
+    document.onkeypress=function(e){
+    var esIE=(document.all);
+    var esNS=(document.layers);
+    tecla=(esIE) ? event.keyCode : e.which;
+    if(tecla==13){
+            enviarLogin(); return false;
+      }
+    }
 </script>
 <h1>Identificación de usuario.</h1>
 <BR />

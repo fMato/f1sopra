@@ -34,57 +34,70 @@ public class ProximaApuestaHandler implements PantallaWeb{
         String accion = request.getParameter("accion");
         if(accion==null) accion="";
 
-        if(accion.equals("alta")){
-            try {
-                altaApuestaProxCarreraSQL(request,usuarioSession,datosPantalla);
-                request.setAttribute("indAviso", "S");
-            } catch (SQLException ex) {
-                System.out.println("Error al dar de alta una apuesta.");
-                datosPantalla.setJsp("./error.jsp");
-                datosPantalla.setTitulo("Error");
-                request.setAttribute("ERROR", "Ha ocurrido un error al guardar tu apuesta. Por favor avisa al administrador.");
-            }
-        }
+        long milisegAhora=0;
+        long milisegCierre=0;
 
         ArrayList pilotos = new ArrayList();
         HashMap proximaCarreaDatos = new HashMap();
-        HashMap proximaCarreraApuesta = new HashMap();
-        try {
-            pilotos = getDatosPilotosSQL();
-            request.setAttribute("pilotos", pilotos);
-            proximaCarreaDatos=getDatosProximaCarreraSQL();
-            request.setAttribute("datosCarrera", proximaCarreaDatos);
-            proximaCarreraApuesta=getApuestaProximaCarreraSQL(usuarioSession);
-            request.setAttribute("datosApuesta", proximaCarreraApuesta);
 
-            String cierre=(String)proximaCarreaDatos.get("fecha_cierre_apuestas");
+        try{
+        pilotos = getDatosPilotosSQL();
+        request.setAttribute("pilotos", pilotos);
+        proximaCarreaDatos=getDatosProximaCarreraSQL();
+        request.setAttribute("datosCarrera", proximaCarreaDatos);
+
+        String cierre=(String)proximaCarreaDatos.get("fecha_cierre_apuestas");
             if(cierre==null) cierre="";
 
             SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            
+
             Date dCierre;
             try {
                 dCierre=sdf.parse(cierre);
-                long milisegAhora=System.currentTimeMillis();
-                long milisegCierre=dCierre.getTime();
+                milisegAhora=System.currentTimeMillis();
+                milisegCierre=dCierre.getTime();
 
                 System.out.println("Fecha y hora actual: "+milisegAhora);
                 System.out.println("Fecha y hora cierre: "+milisegCierre);
 
                 if(milisegAhora>milisegCierre){
                     request.setAttribute("permiteGuardar", "N");
-                    System.out.println("permiteGuardar: N");
                 }else{
                     request.setAttribute("permiteGuardar", "S");
-                    System.out.println("permiteGuardar: S");
                 }
             } catch (ParseException ex) {
                 request.setAttribute("permiteGuardar", "N");
-                System.out.println("permiteGuardar: N");
             }
+        } catch (SQLException ex) {
+            System.out.println("Error al recuperar los pilotos o recuperar lo datos de la carrera.");
+            datosPantalla.setJsp("./error.jsp");
+            datosPantalla.setTitulo("Error");
+            request.setAttribute("ERROR", "Ha ocurrido un error al consultar los datos para la próxima carrera. Por favor avisa al administrador.");
+        }
+        
+        if(accion.equals("alta")){
+            if(milisegAhora<=milisegCierre)
+                try {
+                    altaApuestaProxCarreraSQL(request,usuarioSession,datosPantalla);
+                    request.setAttribute("indAviso", "S");
+                } catch (SQLException ex) {
+                    System.out.println("Error al dar de alta una apuesta.");
+                    datosPantalla.setJsp("./error.jsp");
+                    datosPantalla.setTitulo("Error");
+                    request.setAttribute("ERROR", "Ha ocurrido un error al guardar tu apuesta. Por favor avisa al administrador.");
+                }
+            else{
+                System.out.println("Error al dar de alta una apuesta. Fuera de hora");
+                datosPantalla.setJsp("./error.jsp");
+                datosPantalla.setTitulo("Error");
+                request.setAttribute("ERROR", "Lo siento las apuestas están cerradas porque ya pasó la hora de cierre. La próxima vez no apures tanto.");
+            }
+        }
 
-            
-
+        HashMap proximaCarreraApuesta = new HashMap();
+        try {
+            proximaCarreraApuesta=getApuestaProximaCarreraSQL(usuarioSession);
+            request.setAttribute("datosApuesta", proximaCarreraApuesta);
         } catch (SQLException ex) {
             System.out.println("Error al recuperar los pilotos o recuperar lo datos de la carrera.");
             datosPantalla.setJsp("./error.jsp");
@@ -143,7 +156,6 @@ public class ProximaApuestaHandler implements PantallaWeb{
         System.out.println(this.getClass().getName()+".altaApuestaProxCarreraSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
         String usuario=usuarioSession;
         String pole=request.getParameter("pole");
         String primero=request.getParameter("primero");
@@ -171,12 +183,12 @@ public class ProximaApuestaHandler implements PantallaWeb{
         if(decimo==null) decimo="";
 
         if(validarPosiciones(request)){
-            String query="INSERT INTO apuestas VALUES ('"+usuario+"', '"+pole+"', '"+primero+"', '"+segundo+"', '"+tercero+"', '"+cuarto+"', '"+quinto+"', '"+sexto+"', '"+septimo+"', '"+octavo+"', '"+noveno+"', '"+decimo+"') ON DUPLICATE KEY UPDATE usuario='"+usuario+"', pole='"+pole+"', primero='"+primero+"', segundo='"+segundo+"', tercero='"+tercero+"', cuarto='"+cuarto+"', quinto='"+quinto+"', sexto='"+sexto+"', septimo='"+septimo+"', octavo='"+octavo+"', noveno='"+noveno+"', decimo='"+decimo+"'";
-            System.out.println("Query: "+query);
+            String query="INSERT INTO apuestas (usuario,pole,primero,segundo,tercero,cuarto,quinto,sexto,septimo,octavo,noveno,decimo) "
+                    + "VALUES ('"+usuario+"', '"+pole+"', '"+primero+"', '"+segundo+"', '"+tercero+"', '"+cuarto+"', '"+quinto+"', '"+sexto+"', '"+septimo+"', '"+octavo+"', '"+noveno+"', '"+decimo+"') "
+                    + "ON DUPLICATE KEY "
+                    + "UPDATE usuario='"+usuario+"', pole='"+pole+"', primero='"+primero+"', segundo='"+segundo+"', tercero='"+tercero+"', cuarto='"+cuarto+"', quinto='"+quinto+"', sexto='"+sexto+"', septimo='"+septimo+"', octavo='"+octavo+"', noveno='"+noveno+"', decimo='"+decimo+"'";
             Statement s = conexion.createStatement();
             int i = s.executeUpdate(query);
-
-            System.out.println("Apuesta guardada. Resultado: "+i);
         }else{
             System.out.println("Error al dar de alta una apuesta.");
             datosPantalla.setJsp("./error.jsp");
@@ -189,7 +201,6 @@ public class ProximaApuestaHandler implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getDatosPilotosSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
         String query="SELECT * FROM pilotos WHERE estado='ACTIVO' ORDER BY numero";
 
         Statement s = conexion.createStatement();
@@ -213,7 +224,6 @@ public class ProximaApuestaHandler implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getDatosProximaCarreraSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
 
         Calendar c = Calendar.getInstance();
         String dia = Integer.toString(c.get(Calendar.DATE));
@@ -222,7 +232,6 @@ public class ProximaApuestaHandler implements PantallaWeb{
 
         String fecha_hoy=annio+"-"+mes+"-"+dia;
         String query="SELECT * FROM carreras WHERE fecha_carrera = (SELECT min(fecha_carrera)FROM carreras WHERE fecha_carrera > '"+fecha_hoy+"')";
-        System.out.println("Query: "+query);
 
         Statement s = conexion.createStatement();
         ResultSet rs = s.executeQuery (query);
@@ -260,10 +269,8 @@ public class ProximaApuestaHandler implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getApuestaProximaCarreraSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
 
         String query="SELECT * FROM apuestas WHERE usuario = '"+usuario+"'";
-        System.out.println("Query: "+query);
 
         Statement s = conexion.createStatement();
         ResultSet rs = s.executeQuery (query);
@@ -283,7 +290,6 @@ public class ProximaApuestaHandler implements PantallaWeb{
                 registroRecuperado.put("octavo", rs.getString("octavo"));
                 registroRecuperado.put("noveno", rs.getString("noveno"));
                 registroRecuperado.put("decimo", rs.getString("decimo"));
-                System.out.println("Octavo: "+rs.getString("octavo"));
             }
         }
 

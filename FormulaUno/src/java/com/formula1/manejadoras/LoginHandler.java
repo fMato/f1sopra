@@ -25,7 +25,6 @@ public class LoginHandler implements PantallaWeb{
 
         String accion=request.getParameter("accion");
         if(accion==null)accion="";
-        System.out.println("Accion: "+accion);
         if(accion.equals("login")){
 
             String usuario = request.getParameter("usuario_login");
@@ -58,17 +57,7 @@ public class LoginHandler implements PantallaWeb{
                 if(correo_recuperado==null)correo_recuperado="";
 
                 DatosPersona datosPersona = new DatosPersona(nick_recuperado, nombre_recuperado, tipo_usuario_recuperado, correo_recuperado);
-                System.out.println("Nick: "+datosPersona.getNick());
                 session.setAttribute("datosPersona",datosPersona);
-
-                DatosPersona datosPersona2 = (DatosPersona) session.getAttribute("datosPersona");
-                if(datosPersona2==null){
-                    System.out.println("El datosPersona guardado en sesion es nulo.");
-                }else{
-                    System.out.println("El datosPersona guardado en sesion NO es nulo.");
-                    System.out.println("Tipo de usuario recuperado de sesion: "+datosPersona2.getTipoUsuario());
-                }
-
 
                 try {
                     long antiCache=System.currentTimeMillis();

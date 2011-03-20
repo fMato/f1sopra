@@ -19,7 +19,6 @@ public class BaseDeDatos{
             System.out.println(this.getClass().getName()+".establecerConexion()");
          // Se registra el Driver de MySQL
             DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
-            System.out.println("    Driver MySql preparado.");
         // Establecemos la conexión con la base de datos.
            Connection conexion = DriverManager.getConnection ("jdbc:mysql://127.0.0.1/"+baseDeDatos,usuario, password);
 
@@ -27,6 +26,7 @@ public class BaseDeDatos{
         }
 
         public void cerrarConexion(Connection conexion) throws SQLException{
+            System.out.println(this.getClass().getName()+".cerrarConexion()");
 
             // Cerramos la conexion a la base de datos.
             conexion.close();

@@ -34,6 +34,7 @@ public class AltaUsuario implements PantallaWeb{
                 datosPantalla.setJsp("./error.jsp");
                 datosPantalla.setTitulo("Error");
                 request.setAttribute("ERROR", "Error al dar de alta el usuario.");
+                return request;
             }
         }
 
@@ -43,7 +44,6 @@ public class AltaUsuario implements PantallaWeb{
         System.out.println(this.getClass().getName()+".altaUsuarioSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
 
         String nick=request.getParameter("nick_alta");
         String nombre=request.getParameter("nombre_alta");
@@ -56,17 +56,16 @@ public class AltaUsuario implements PantallaWeb{
         if(pass==null) pass="";
 
         String query="INSERT INTO usuarios (nick,pass,nombre,tipo_usuario,correo) VALUES ('"+nick+"', '"+pass+"', '"+nombre+"', 'U', '"+correo+"')";
-        System.out.println("Query: "+query);
         Statement s = conexion.createStatement();
         int i = s.executeUpdate(query);
 
         System.out.println("Apuesta guardada. Resultado: "+i);
 
-        if(i==0){
-        System.out.println("Error al dar de alta un usuario.");
-        datosPantalla.setJsp("./error.jsp");
-        datosPantalla.setTitulo("Error");
-        request.setAttribute("ERROR", "Error al dar de alta el usuario.");
+        if(i!=0){
+            System.out.println("Error al dar de alta un usuario.");
+            datosPantalla.setJsp("./error.jsp");
+            datosPantalla.setTitulo("Error");
+            request.setAttribute("ERROR", "Error al dar de alta el usuario.");
         }
     }
 }

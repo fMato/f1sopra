@@ -1,5 +1,12 @@
+<%@page import="com.formula1.comunes.DatosPersona"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
+<%
+DatosPersona datosPersonaSesion = (DatosPersona)session.getAttribute("datosPersona");
+String usuarioSesion = "";
+if(datosPersonaSesion!=null)
+    usuarioSesion=datosPersonaSesion.getNick();
+%>
 <h1>Clasificación general</h1>
 <BR />
 <table id="tablaGeneral" border="0" width="100%">
@@ -29,6 +36,47 @@
 <%
 ArrayList pilotosOrdenados = (ArrayList)request.getAttribute("pilotosOrdenados");
 HashMap datosClasifGeneral = (HashMap) request.getAttribute("datosClasifGeneral");
+HashMap puntosMaximos = (HashMap) request.getAttribute("puntosMaximos");
+
+String puntosMax1=(String)puntosMaximos.get("1");
+if(puntosMax1==null)puntosMax1="0";
+String puntosMax2=(String)puntosMaximos.get("2");
+if(puntosMax2==null)puntosMax2="0";
+String puntosMax3=(String)puntosMaximos.get("3");
+if(puntosMax3==null)puntosMax3="0";
+String puntosMax4=(String)puntosMaximos.get("4");
+if(puntosMax4==null)puntosMax4="0";
+String puntosMax5=(String)puntosMaximos.get("5");
+if(puntosMax5==null)puntosMax5="0";
+String puntosMax6=(String)puntosMaximos.get("6");
+if(puntosMax6==null)puntosMax6="0";
+String puntosMax7=(String)puntosMaximos.get("7");
+if(puntosMax7==null)puntosMax7="0";
+String puntosMax8=(String)puntosMaximos.get("8");
+if(puntosMax8==null)puntosMax8="0";
+String puntosMax9=(String)puntosMaximos.get("9");
+if(puntosMax9==null)puntosMax9="0";
+String puntosMax10=(String)puntosMaximos.get("10");
+if(puntosMax10==null)puntosMax10="0";
+String puntosMax11=(String)puntosMaximos.get("11");
+if(puntosMax11==null)puntosMax11="0";
+String puntosMax12=(String)puntosMaximos.get("12");
+if(puntosMax12==null)puntosMax12="0";
+String puntosMax13=(String)puntosMaximos.get("13");
+if(puntosMax13==null)puntosMax13="0";
+String puntosMax14=(String)puntosMaximos.get("14");
+if(puntosMax14==null)puntosMax14="0";
+String puntosMax15=(String)puntosMaximos.get("15");
+if(puntosMax15==null)puntosMax15="0";
+String puntosMax16=(String)puntosMaximos.get("16");
+if(puntosMax16==null)puntosMax16="0";
+String puntosMax17=(String)puntosMaximos.get("17");
+if(puntosMax17==null)puntosMax17="0";
+String puntosMax18=(String)puntosMaximos.get("18");
+if(puntosMax18==null)puntosMax18="0";
+String puntosMax19=(String)puntosMaximos.get("19");
+if(puntosMax19==null)puntosMax19="0";
+
 
 for(int i=0; i<pilotosOrdenados.size();i++){
     String usuario = (String)pilotosOrdenados.get(i);
@@ -76,27 +124,27 @@ for(int i=0; i<pilotosOrdenados.size();i++){
     String total=(String)datosUnPiloto.get("total");
     if(total==null)total="0";
     %>
-    <TR>
+    <TR <%if(usuarioSesion.equals(usuario)){%>class="filaSel"<%}%>>
         <TD><%=nombre%></TD>
-        <TD align="center"><%=carrera1%></TD>
-        <TD align="center"><%=carrera2%></TD>
-        <TD align="center"><%=carrera3%></TD>
-        <TD align="center"><%=carrera4%></TD>
-        <TD align="center"><%=carrera5%></TD>
-        <TD align="center"><%=carrera6%></TD>
-        <TD align="center"><%=carrera7%></TD>
-        <TD align="center"><%=carrera8%></TD>
-        <TD align="center"><%=carrera9%></TD>
-        <TD align="center"><%=carrera10%></TD>
-        <TD align="center"><%=carrera11%></TD>
-        <TD align="center"><%=carrera12%></TD>
-        <TD align="center"><%=carrera13%></TD>
-        <TD align="center"><%=carrera14%></TD>
-        <TD align="center"><%=carrera15%></TD>
-        <TD align="center"><%=carrera16%></TD>
-        <TD align="center"><%=carrera17%></TD>
-        <TD align="center"><%=carrera18%></TD>
-        <TD align="center"><%=carrera19%></TD>
+        <TD align="center" <%if(puntosMax1.equals(carrera1)){%>class="maxPunt"<%}%>><%=carrera1%></TD>
+        <TD align="center" <%if(puntosMax2.equals(carrera2)){%>class="maxPunt"<%}%>><%=carrera2%></TD>
+        <TD align="center" <%if(puntosMax3.equals(carrera3)){%>class="maxPunt"<%}%>><%=carrera3%></TD>
+        <TD align="center" <%if(puntosMax4.equals(carrera4)){%>class="maxPunt"<%}%>><%=carrera4%></TD>
+        <TD align="center" <%if(puntosMax5.equals(carrera5)){%>class="maxPunt"<%}%>><%=carrera5%></TD>
+        <TD align="center" <%if(puntosMax6.equals(carrera6)){%>class="maxPunt"<%}%>><%=carrera6%></TD>
+        <TD align="center" <%if(puntosMax7.equals(carrera7)){%>class="maxPunt"<%}%>><%=carrera7%></TD>
+        <TD align="center" <%if(puntosMax8.equals(carrera8)){%>class="maxPunt"<%}%>><%=carrera8%></TD>
+        <TD align="center" <%if(puntosMax9.equals(carrera9)){%>class="maxPunt"<%}%>><%=carrera9%></TD>
+        <TD align="center" <%if(puntosMax10.equals(carrera10)){%>class="maxPunt"<%}%>><%=carrera10%></TD>
+        <TD align="center" <%if(puntosMax11.equals(carrera11)){%>class="maxPunt"<%}%>><%=carrera11%></TD>
+        <TD align="center" <%if(puntosMax12.equals(carrera12)){%>class="maxPunt"<%}%>><%=carrera12%></TD>
+        <TD align="center" <%if(puntosMax13.equals(carrera13)){%>class="maxPunt"<%}%>><%=carrera13%></TD>
+        <TD align="center" <%if(puntosMax14.equals(carrera14)){%>class="maxPunt"<%}%>><%=carrera14%></TD>
+        <TD align="center" <%if(puntosMax15.equals(carrera15)){%>class="maxPunt"<%}%>><%=carrera15%></TD>
+        <TD align="center" <%if(puntosMax16.equals(carrera16)){%>class="maxPunt"<%}%>><%=carrera16%></TD>
+        <TD align="center" <%if(puntosMax17.equals(carrera17)){%>class="maxPunt"<%}%>><%=carrera17%></TD>
+        <TD align="center" <%if(puntosMax18.equals(carrera18)){%>class="maxPunt"<%}%>><%=carrera18%></TD>
+        <TD align="center" <%if(puntosMax19.equals(carrera19)){%>class="maxPunt"<%}%>><%=carrera19%></TD>
         <TD align="center"><%=total%></TD>
     </TR>
 <%

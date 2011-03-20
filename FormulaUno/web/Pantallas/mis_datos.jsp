@@ -61,6 +61,15 @@ function modificarDatos(){
         alert("No has modificado nada...");
     }
 }
+
+document.onkeypress=function(e){
+    var esIE=(document.all);
+    var esNS=(document.layers);
+    tecla=(esIE) ? event.keyCode : e.which;
+    if(tecla==13){
+            modificarDatos(); return false;
+      }
+    }
 </script>
 <form name="frmDatos" method="post" action="./modificarMisDatos.f1">
     <input type="hidden" name="nick" value="<%=(String)datosUsuario.get("nick")%>"/>

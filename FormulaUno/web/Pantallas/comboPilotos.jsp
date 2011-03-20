@@ -14,22 +14,14 @@ if(pilotos==null){
 }
 String indCombo = request.getParameter("indSelect");
 if(indCombo==null)indCombo="";
-System.out.println("IndCombo: "+indCombo);
 String indSelect=(String) datosApuesta.get(indCombo);
 if(indSelect==null)indSelect="";
-System.out.println("IndSelect: "+indSelect);
 for(int i=0; i<pilotos.size(); i++){
     HashMap pilotosItem = (HashMap) pilotos.get(i);
     String numero = (String) pilotosItem.get("numero");
     String nombre = (String) pilotosItem.get("nombre");
     %>
-    <option value="<%=numero%>"
-            <%
-            if(indSelect.equals(numero)){ %>
-                selected="true"
-                <%}
-            %>
-            >
+    <option value="<%=numero%>"<%if(indSelect.equals(numero)){ %>selected="true"<%}%>>
         <%=nombre%>
     </option>
     <%

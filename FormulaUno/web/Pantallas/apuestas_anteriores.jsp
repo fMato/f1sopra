@@ -1,5 +1,12 @@
+<%@page import="com.formula1.comunes.DatosPersona"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
+<%
+DatosPersona datosPersonaSesion = (DatosPersona)session.getAttribute("datosPersona");
+String usuarioSesion = "";
+if(datosPersonaSesion!=null)
+    usuarioSesion=datosPersonaSesion.getNick();
+%>
 <h1>Consultar apuestas anteriores.</h1>
 <BR />
 <table id="tablaGeneral" border="0" width="100%">
@@ -76,141 +83,141 @@ for(int i=0; i<listaUsuarios.size();i++){
     if(carrera18==null)carrera18="-";
     String carrera19=(String)datosUnPiloto.get("19");
     if(carrera19==null)carrera19="-";
-
+    String rutaImagenLupa="./Imagenes/otras/lupa2.png";
     long antiCache=System.currentTimeMillis();
     %>
-    <TR>
+    <TR <%if(usuarioSesion.equals(usuario)){%>class="filaSel"<%}%>>
         <TD><%=nombre%></TD>
         <TD align="center">
             <%
             if(carrera1.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=1"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 1." title="Ver clasificación de <%=nombre%> para la carrera 1."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=1"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 1." title="Ver clasificación de <%=nombre%> para la carrera 1."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera2.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=2"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 2." title="Ver clasificación de <%=nombre%> para la carrera 2."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=2"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 2." title="Ver clasificación de <%=nombre%> para la carrera 2."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera3.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=3"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 3." title="Ver clasificación de <%=nombre%> para la carrera 3."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=3"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 3." title="Ver clasificación de <%=nombre%> para la carrera 3."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera4.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=4"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 4." title="Ver clasificación de <%=nombre%> para la carrera 4."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=4"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 4." title="Ver clasificación de <%=nombre%> para la carrera 4."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera5.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=5"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 5." title="Ver clasificación de <%=nombre%> para la carrera 5."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=5"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 5." title="Ver clasificación de <%=nombre%> para la carrera 5."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera6.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=6"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 6." title="Ver clasificación de <%=nombre%> para la carrera 6."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=6"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 6." title="Ver clasificación de <%=nombre%> para la carrera 6."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera7.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=7"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 7." title="Ver clasificación de <%=nombre%> para la carrera 7."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=7"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 7." title="Ver clasificación de <%=nombre%> para la carrera 7."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera8.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=8"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 8." title="Ver clasificación de <%=nombre%> para la carrera 8."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=8"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 8." title="Ver clasificación de <%=nombre%> para la carrera 8."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera9.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=9"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 9." title="Ver clasificación de <%=nombre%> para la carrera 9."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=9"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 9." title="Ver clasificación de <%=nombre%> para la carrera 9."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera10.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=10"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 10." title="Ver clasificación de <%=nombre%> para la carrera 10."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=10"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 10." title="Ver clasificación de <%=nombre%> para la carrera 10."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera11.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=11"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 11." title="Ver clasificación de <%=nombre%> para la carrera 11."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=11"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 11." title="Ver clasificación de <%=nombre%> para la carrera 11."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera12.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=12"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 12." title="Ver clasificación de <%=nombre%> para la carrera 12."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=12"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 12." title="Ver clasificación de <%=nombre%> para la carrera 12."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera13.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=13"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 13." title="Ver clasificación de <%=nombre%> para la carrera 13."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=13"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 13." title="Ver clasificación de <%=nombre%> para la carrera 13."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera14.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=14"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 14." title="Ver clasificación de <%=nombre%> para la carrera 14."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=14"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 14." title="Ver clasificación de <%=nombre%> para la carrera 14."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera15.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=15"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 15." title="Ver clasificación de <%=nombre%> para la carrera 15."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=15"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 15." title="Ver clasificación de <%=nombre%> para la carrera 15."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera16.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=16"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 16." title="Ver clasificación de <%=nombre%> para la carrera 16."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=16"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 16." title="Ver clasificación de <%=nombre%> para la carrera 16."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera17.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=17"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 17." title="Ver clasificación de <%=nombre%> para la carrera 17."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=17"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 17." title="Ver clasificación de <%=nombre%> para la carrera 17."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera18.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=18"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 18." title="Ver clasificación de <%=nombre%> para la carrera 18."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=18"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 18." title="Ver clasificación de <%=nombre%> para la carrera 18."/></a>
            <%}else{%> - <%}
             %>
         </TD>
         <TD align="center">
             <%
             if(carrera19.equals("S")){%>
-            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=19"><img src="./Imagenes/otras/lupa.gif" alt="Ver clasificación de <%=nombre%> para la carrera 19." title="Ver clasificación de <%=nombre%> para la carrera 19."/></a>
+            <a href="./apuestaAnt.f1?antiCache=<%=antiCache%>&usuario=<%=usuario%>&carrera=19"><img src="<%=rutaImagenLupa%>" alt="Ver clasificación de <%=nombre%> para la carrera 19." title="Ver clasificación de <%=nombre%> para la carrera 19."/></a>
            <%}else{%> - <%}
             %>
         </TD>

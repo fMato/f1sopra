@@ -18,6 +18,14 @@
             document.frmDatos.submit();
         }
     }
+document.onkeypress=function(e){
+    var esIE=(document.all);
+    var esNS=(document.layers);
+    tecla=(esIE) ? event.keyCode : e.which;
+    if(tecla==13){
+            darAlta(); return false;
+      }
+    }
 </script>
 
 <h1>Alta de usuario</h1>

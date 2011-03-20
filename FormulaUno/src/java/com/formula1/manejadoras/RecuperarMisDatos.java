@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class RecuperarMisDatos implements PantallaWeb{
 
     public HttpServletRequest processRequest(HttpServletRequest request, HttpServletResponse response, DatosPantalla datosPantalla) {
-
+        System.out.println(this.getClass().getName());
         HttpSession session = request.getSession();
         DatosPersona datosPersona = (DatosPersona) session.getAttribute("datosPersona");
         String usuarioSession=datosPersona.getNick();

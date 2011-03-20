@@ -1,39 +1,30 @@
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%
 long antiCache=System.currentTimeMillis();
-
-HashMap datosCarrera = (HashMap) request.getAttribute("datosCarrera");
-
-if(datosCarrera==null){
-    datosCarrera=new HashMap();
-}
-String nombre_carrera = (String) datosCarrera.get("nombre");
-String fecha_carrera = (String) datosCarrera.get("fecha_carrera");
-String fecha_cierre_apuestas = (String) datosCarrera.get("fecha_cierre_apuestas");
-String fecha_carrera_formateada = (String) datosCarrera.get("fecha_carrera_formateada");
-String fecha_cierre_apuestas_formateada = (String) datosCarrera.get("fecha_cierre_apuestas_formateada");
 %>
+
 <script type="text/javascript">
     var mensaje="";
-    function lanzarAltaApuesta(){
+    function guardarResultado(){
         if(validarApuesta())
-            document.frmDatosProxApuesta.submit();
+            document.frmDatos.submit();
         else
             alert(mensaje);
     }
     function validarApuesta(){
         mensaje="";
         var validacionApuestas=new Array(10);
-        validacionApuestas[0]=document.frmDatosProxApuesta.primero.options[document.frmDatosProxApuesta.primero.selectedIndex].value;
-        validacionApuestas[1]=document.frmDatosProxApuesta.segund.options[document.frmDatosProxApuesta.segund.selectedIndex].value;
-        validacionApuestas[2]=document.frmDatosProxApuesta.tercero.options[document.frmDatosProxApuesta.tercero.selectedIndex].value;
-        validacionApuestas[3]=document.frmDatosProxApuesta.cuarto.options[document.frmDatosProxApuesta.cuarto.selectedIndex].value;
-        validacionApuestas[4]=document.frmDatosProxApuesta.quinto.options[document.frmDatosProxApuesta.quinto.selectedIndex].value;
-        validacionApuestas[5]=document.frmDatosProxApuesta.sexto.options[document.frmDatosProxApuesta.sexto.selectedIndex].value;
-        validacionApuestas[6]=document.frmDatosProxApuesta.septimo.options[document.frmDatosProxApuesta.septimo.selectedIndex].value;
-        validacionApuestas[7]=document.frmDatosProxApuesta.octavo.options[document.frmDatosProxApuesta.octavo.selectedIndex].value;
-        validacionApuestas[8]=document.frmDatosProxApuesta.noveno.options[document.frmDatosProxApuesta.noveno.selectedIndex].value;
-        validacionApuestas[9]=document.frmDatosProxApuesta.decimo.options[document.frmDatosProxApuesta.decimo.selectedIndex].value;
+        validacionApuestas[0]=document.frmDatos.primero.options[document.frmDatos.primero.selectedIndex].value;
+        validacionApuestas[1]=document.frmDatos.segund.options[document.frmDatos.segund.selectedIndex].value;
+        validacionApuestas[2]=document.frmDatos.tercero.options[document.frmDatos.tercero.selectedIndex].value;
+        validacionApuestas[3]=document.frmDatos.cuarto.options[document.frmDatos.cuarto.selectedIndex].value;
+        validacionApuestas[4]=document.frmDatos.quinto.options[document.frmDatos.quinto.selectedIndex].value;
+        validacionApuestas[5]=document.frmDatos.sexto.options[document.frmDatos.sexto.selectedIndex].value;
+        validacionApuestas[6]=document.frmDatos.septimo.options[document.frmDatos.septimo.selectedIndex].value;
+        validacionApuestas[7]=document.frmDatos.octavo.options[document.frmDatos.octavo.selectedIndex].value;
+        validacionApuestas[8]=document.frmDatos.noveno.options[document.frmDatos.noveno.selectedIndex].value;
+        validacionApuestas[9]=document.frmDatos.decimo.options[document.frmDatos.decimo.selectedIndex].value;
 
         for(var i=0; i<validacionApuestas.length;i++){
             if(validacionApuestas[i]==""){
@@ -49,8 +40,13 @@ String fecha_cierre_apuestas_formateada = (String) datosCarrera.get("fecha_cierr
             }
         }
 
-        if(document.frmDatosProxApuesta.pole.options[document.frmDatosProxApuesta.pole.selectedIndex].value==""){
+        if(document.frmDatos.pole.options[document.frmDatos.pole.selectedIndex].value==""){
             mensaje="Te falta por elegir la pole.";
+            return false;
+        }
+
+        if(document.frmDatos.carrera.options[document.frmDatos.carrera.selectedIndex].value==""){
+            mensaje="Te falta por elegir la carrera.";
             return false;
         }
 
@@ -58,10 +54,11 @@ String fecha_cierre_apuestas_formateada = (String) datosCarrera.get("fecha_cierr
     }
 </script>
 
-<h1>Mi apuesta para el <%=nombre_carrera%>.</h1>
+<h1>Introducir el resultado.</h1>
+
+<FORM name="frmDatos" method="post" action="./guardarResultadoCarrera.f1?antiCache=<%=antiCache%>">
+<input type="hidden" name="accion" value="guardar"/>
 <div style="width:360px;float:left;">
-    <FORM name="frmDatosProxApuesta" method="post" action="./guardarApuesta.f1?antiCache=<%=antiCache%>">
-        <input type="hidden" name="accion" value="alta"/>
         <p>
             <label class="posicionesLabel" for="pole">Pole:</label>
             <select name="pole">
@@ -112,41 +109,60 @@ String fecha_cierre_apuestas_formateada = (String) datosCarrera.get("fecha_cierr
             </select>
             <BR />
             <BR />
-             <%
-            String permiteGuardar=(String)request.getAttribute("permiteGuardar");
-            if(permiteGuardar==null) permiteGuardar="N";
-            if(permiteGuardar.equals("S")){%>
-                <span style="float:right;">
-                <a href="#" onclick="lanzarAltaApuesta();" class="enlacef1">Guardar apuesta</a>
-                </span>
-            <%}
-            %>
+            <span style="float:right;">
+                <a href="#" onclick="guardarResultado();" class="enlacef1">Guardar resultado</a>
+            </span>
         </p>
-    </FORM>
 </div>
-<div style="width:350px;float:left;text-align:center;">
-    <BR />
-    <BR />
-    <BR />
-    <BR />
-    Próximo GP: <b><%=nombre_carrera%></b><BR />
-    <%=fecha_carrera_formateada%><BR />
-    Cierre de las apuestas: <%=fecha_cierre_apuestas_formateada%>
-    <BR /><BR />
-    <%
-        String indAviso=(String)request.getAttribute("indAviso");
-        if(indAviso==null) indAviso="N";
-        if(indAviso.equals("S")){%>
-            <div id="divConfirmacion">
-                Tu apuesta se ha guardado correctamente.<BR /><BR />
-                Puedes cambiarla todas las veces que quieras hasta el cierre de apuestas.
-            </div>
-            <script type="text/javascript">
-                function ocultaDivConfirm(){
-                    document.getElementById("divConfirmacion").style.display="none";
-                }
-                setTimeout("ocultaDivConfirm()",6000);
-            </script>
-        <%}
+<div style="width:350px;float:left;">
+    <p>
+        <%
+        ArrayList carreras = (ArrayList) request.getAttribute("carreras");
+
+        if(carreras==null){
+            carreras=new ArrayList();
+        }
         %>
+    <label class="apuestaAnteriorLabel" for="carrera">Carrera:</label>
+    <select name="carrera">
+        <option value="">--Selecciona una carrera--</option>
+        <%
+        String indCarrSelect=(String) request.getAttribute("ultimaCarreraDisputada");
+        if(indCarrSelect==null)indCarrSelect="";
+        for(int i=0; i<carreras.size(); i++){
+            HashMap carreraItem = (HashMap) carreras.get(i);
+            String numeroCarrera = (String) carreraItem.get("identificador");
+            String nombreCarrera = (String) carreraItem.get("nombre");
+            %>
+            <option value="<%=numeroCarrera%>"<%if(indCarrSelect.equals(numeroCarrera)){ %>selected="true"<%}%>>
+                <%=nombreCarrera%>
+            </option>
+            <%
+        }
+        %>
+    </select>
+    <BR />
+    <BR />
+    <input type="checkbox" name="chCont" id="chCont" value="S" checked="true" /> Contabilizar después de guardar.
+    <p>
+    <BR />
+    <BR />
+    <BR />
+    <BR />
+    <%
+    String mensajeConfirm = (String)request.getAttribute("mensajeConfirm");
+    if(mensajeConfirm==null)mensajeConfirm="";
+
+    if(!mensajeConfirm.equals("")){%>
+    <div id="divConfirmacion">
+        <%=mensajeConfirm%>
+    </div>
+    <script type="text/javascript">
+        function ocultaDivConfirm(){
+            document.getElementById("divConfirmacion").style.display="none";
+        }
+        setTimeout("ocultaDivConfirm()",6000);
+    </script>
+    <%}%>
 </div>
+</FORM>

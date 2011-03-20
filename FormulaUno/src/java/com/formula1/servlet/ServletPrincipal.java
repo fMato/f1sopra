@@ -44,11 +44,9 @@ public class ServletPrincipal extends HttpServlet {
             HashMap datosPeticion = new HashMap();
             String pantalla = "";
             HttpSession session = request.getSession(true);
-            System.out.println("Session: "+session);
             String hayUsuarioSesion=(String)session.getAttribute("hayUsuarioSesion");
             if(hayUsuarioSesion==null) hayUsuarioSesion="";
             request.setAttribute("hayUsuarioSesion", hayUsuarioSesion);
-            System.out.println("hayUsuarioSesion: "+hayUsuarioSesion);
 
             System.out.println("Url solicitada: "+request.getServletPath());
             pantalla=getPantalla(request.getServletPath()); // Recuperamos la orden introducida por el usuario.
@@ -73,14 +71,15 @@ public class ServletPrincipal extends HttpServlet {
                 System.out.println("Clase manejadora: "+claseManejadora);
                 System.out.println("Jsp de presentación: "+jspPresentacion);
 
-                try{
-                    PantallaWeb objetoManejador = (PantallaWeb) Class.forName(claseManejadora).newInstance();
-                    objetoManejador.processRequest(request, response, datosPantalla);
-                }catch(Exception ex){
-                    datosPantalla.setJsp("./error.jsp");
-                    datosPantalla.setTitulo("Error");
-                    request.setAttribute("ERROR", "Ha ocurrido un error al intentar cargar la pantalla solicitada. Por favor comprueba que la dirección introducida es correcta o avisa al administrador.");
-                }
+                if(!claseManejadora.equalsIgnoreCase("NO"))
+                    try{
+                        PantallaWeb objetoManejador = (PantallaWeb) Class.forName(claseManejadora).newInstance();
+                        objetoManejador.processRequest(request, response, datosPantalla);
+                    }catch(Exception ex){
+                        datosPantalla.setJsp("./error.jsp");
+                        datosPantalla.setTitulo("Error");
+                        request.setAttribute("ERROR", "Ha ocurrido un error al intentar cargar la pantalla solicitada. Por favor comprueba que la dirección introducida es correcta o avisa al administrador.");
+                    }
             }
             else{
                 System.out.println("No hay sesión, es obligatorio un usuario conectado.");
@@ -163,6 +162,11 @@ public class ServletPrincipal extends HttpServlet {
         menuItem.put("url", "./misDatos.f1?antiCache="+antiCache);
         opcionesMenu.add(menuItem);
 
+        menuItem = new HashMap();
+        menuItem.put("texto", "Normas. <img src='./Imagenes/otras/info.png' />");
+        menuItem.put("url", "./normativa.f1?antiCache="+antiCache);
+        opcionesMenu.add(menuItem);
+
         DatosPersona datosPersona = (DatosPersona) session.getAttribute("datosPersona");
         if(datosPersona!=null && datosPersona.getTipoUsuario().equals("A")){
             System.out.println("Opciones de administración");
@@ -170,8 +174,11 @@ public class ServletPrincipal extends HttpServlet {
             menuItem.put("texto", "Alta de usuario.");
             menuItem.put("url", "./inicioAltaUsuario.f1?antiCache="+antiCache);
             opcionesMenu.add(menuItem);
-        }else{
-            System.out.println("Objeto datosPersona recuperado de sesion en el servlet: "+datosPersona);
+
+            menuItem = new HashMap();
+            menuItem.put("texto", "Informar resultado.");
+            menuItem.put("url", "./resultadoCarrera.f1?antiCache="+antiCache);
+            opcionesMenu.add(menuItem);
         }
 
         // Añadimos los datos del menú al request.

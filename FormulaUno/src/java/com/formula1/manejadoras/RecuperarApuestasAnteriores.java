@@ -53,7 +53,6 @@ public class RecuperarApuestasAnteriores implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getApuestasAnterioresSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
         String query="SELECT a.usuario, b.nombre, a.carrera FROM apuestas_carreras a, usuarios b WHERE a.usuario=b.nick ORDER BY b.nombre, a.carrera";
 
         Statement s = conexion.createStatement();
@@ -70,7 +69,6 @@ public class RecuperarApuestasAnteriores implements PantallaWeb{
                 String carrera=rs.getString("carrera");
 
                 if(!usuarioAnterior.equals(usuarioActual)){
-                    System.out.println("Nuevo usuario.");
                     unUsuario = new HashMap();
                     unUsuario.put("nombre", nombre);
                     unUsuario.put(carrera,"S");
@@ -91,7 +89,6 @@ public class RecuperarApuestasAnteriores implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getUsuariosSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
         String query="SELECT nick, nombre FROM usuarios ORDER BY nombre ASC";
 
         Statement s = conexion.createStatement();
@@ -101,8 +98,6 @@ public class RecuperarApuestasAnteriores implements PantallaWeb{
             while(rs.next()){
                 listaUsuarios.add(rs.getString("nick"));
                 nombresUsuarios.add(rs.getString("nombre"));
-                System.out.println(rs.getString("nick"));
-                System.out.println(rs.getString("nombre"));
             }
         }
         bbdd.cerrarConexion(conexion);

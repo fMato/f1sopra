@@ -78,6 +78,9 @@ a.enlacef1:visited{
 	width: 900px;
 	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño */
 	overflow: hidden; /* esta declaración hace que .container conozca dónde terminan las columnas flotantes incluidas y las contenga */
+        position: absolute;
+        margin-left: -450px;
+        left: 50%;
 }
 
 /* ~~ Estas son las columnas para el diseño. ~~ 
@@ -227,4 +230,19 @@ p label.apuestaAnteriorLabel{
 .pie a:hover{
     color: #FF9900;
     text-decoration: underline;
+}
+#divConfirmacion{
+    border: solid 2px #FF0000;
+    text-align: center;
+    padding: 5px;
+}
+.maxPunt{
+    background-color: #00CC00;
+}
+.filaSel{
+    background-color: #FF9900;
+}
+p label.tabulacion{
+    width:20px;
+    float:left;
 }

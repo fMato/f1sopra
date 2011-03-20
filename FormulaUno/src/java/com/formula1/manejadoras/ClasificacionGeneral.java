@@ -30,18 +30,23 @@ public class ClasificacionGeneral implements PantallaWeb{
 
         HashMap puntosTotales = new HashMap();
         HashMap datosClasifGeneral = new HashMap();
+        HashMap puntosMaximos = new HashMap();
         try {
             puntosTotales=getPuntosTotalesSQL();
             datosClasifGeneral = getPuntosCarrerasSQL(puntosTotales);
+            puntosMaximos=getPuntosMaximosSQL();
+            
         } catch (SQLException ex) {
             System.out.println("Error al calcular la clasificación general.");
             datosPantalla.setJsp("./error.jsp");
             datosPantalla.setTitulo("Error");
             request.setAttribute("ERROR", "No se ha podido calcular la clasifiación general, por favor ponte en contacto con el administrador.");
+            return request;
         }
 
         request.setAttribute("pilotosOrdenados", pilotosOrdenados);
         request.setAttribute("datosClasifGeneral", datosClasifGeneral);
+        request.setAttribute("puntosMaximos", puntosMaximos);
 
         return request;
     }
@@ -49,7 +54,6 @@ public class ClasificacionGeneral implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getPuntosCarreraSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
         String query="SELECT a.usuario, a.carrera, a.puntos, b.nombre FROM resultados_apuestas a, usuarios b WHERE a.usuario=b.nick ORDER BY a.usuario, a.carrera";
 
         Statement s = conexion.createStatement();
@@ -66,7 +70,6 @@ public class ClasificacionGeneral implements PantallaWeb{
                 String nombre=rs.getString("nombre");
                 
                 if(!usuarioActual.equals(usuarioAnt)){
-                    System.out.println("Nuevo usuario.");
                     resultadosUnUsuario = new HashMap();
                     resultadosUnUsuario.put("nombre", nombre);
                     resultadosUnUsuario.put("total", (String)puntosTotales.get(usuarioActual));
@@ -78,7 +81,6 @@ public class ClasificacionGeneral implements PantallaWeb{
                     resultadosTodosUsuarios.put(usuarioActual, resultadosUnUsuario);
                 }
                 usuarioAnt=usuarioActual;
-                System.out.println("Usuario: "+usuarioActual+" Puntos: "+puntos+" Carrera: "+carrera);
             }
         }
         bbdd.cerrarConexion(conexion);
@@ -89,8 +91,7 @@ public class ClasificacionGeneral implements PantallaWeb{
         System.out.println(this.getClass().getName()+".getPuntosTotalesSQL()");
         BaseDeDatos bbdd = new BaseDeDatos();
         Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
-        String query="SELECT usuario, SUM(puntos) as puntos_totales FROM resultados_apuestas GROUP BY usuario ORDER BY puntos_totales DESC";
+        String query="SELECT usuario, SUM(puntos) as puntos_totales FROM resultados_apuestas GROUP BY usuario ORDER BY puntos_totales DESC, usuario ASC";
 
         Statement s = conexion.createStatement();
         ResultSet rs = s.executeQuery (query);
@@ -100,10 +101,28 @@ public class ClasificacionGeneral implements PantallaWeb{
             while(rs.next()){
                 puntosTotales.put(rs.getString("usuario"), rs.getString("puntos_totales"));
                 pilotosOrdenados.add(rs.getString("usuario"));
-                System.out.println(rs.getString("usuario"));
             }
         }
         bbdd.cerrarConexion(conexion);
         return puntosTotales;
+    }
+
+    public HashMap getPuntosMaximosSQL() throws SQLException {
+        System.out.println(this.getClass().getName()+".getPuntosMaximoSQL()");
+        BaseDeDatos bbdd = new BaseDeDatos();
+        Connection conexion = bbdd.establecerConexion();
+        String query="SELECT carrera, MAX(puntos) AS puntos FROM resultados_apuestas GROUP BY carrera";
+
+        Statement s = conexion.createStatement();
+        ResultSet rs = s.executeQuery (query);
+
+        HashMap puntosMaximos = new HashMap();
+        if(rs!=null){
+            while(rs.next()){
+                puntosMaximos.put(rs.getString("carrera"), rs.getString("puntos"));
+            }
+        }
+        bbdd.cerrarConexion(conexion);
+        return puntosMaximos;
     }
 }

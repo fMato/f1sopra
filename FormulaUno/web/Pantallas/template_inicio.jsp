@@ -17,6 +17,7 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="./Imagenes/otras/favicon2.ico">
         <title><%=titulo%></title>
         <link rel="stylesheet" type="text/css" href="./css/general.css" />
         <script type="text/javascript" src="./javascript/comues.js"></script>
