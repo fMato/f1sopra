@@ -61,11 +61,11 @@ public class AltaUsuario implements PantallaWeb{
 
         System.out.println("Apuesta guardada. Resultado: "+i);
 
-        if(i!=0){
-            System.out.println("Error al dar de alta un usuario.");
-            datosPantalla.setJsp("./error.jsp");
-            datosPantalla.setTitulo("Error");
-            request.setAttribute("ERROR", "Error al dar de alta el usuario.");
-        }
+//        if(i!=0){
+//            System.out.println("Error al dar de alta un usuario.");
+//            datosPantalla.setJsp("./error.jsp");
+//            datosPantalla.setTitulo("Error");
+//            request.setAttribute("ERROR", "Error al dar de alta el usuario.");
+//        }
     }
 }

@@ -72,7 +72,7 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
 
             <div class="menuLateral"></div>
             <div class="pie">
-                Página optimizada para Mozilla-Firefox. Para cualquier problema contactar con <a href="mailto:francisco.mato@gmail.com">Francisco Mato</a> o <a href="mailto:vpalomos_profit@bankinter.es">Victor Palomo</a>.
+                Página optimizada para Mozilla-Firefox. Para cualquier problema contactar con <a href="mailto:francisco.mato@gmail.com">Francisco Mato</a> o <a href="mailto:fuensa82@gmail.com">Victor Palomo</a>.
             </div>
         </div><!-- fin .container -->
     </body>

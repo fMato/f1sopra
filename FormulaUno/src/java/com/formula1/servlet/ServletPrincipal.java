@@ -163,7 +163,7 @@ public class ServletPrincipal extends HttpServlet {
         opcionesMenu.add(menuItem);
 
         menuItem = new HashMap();
-        menuItem.put("texto", "Normas. <img src='./Imagenes/otras/info.png' />");
+        menuItem.put("texto", "Normas.");
         menuItem.put("url", "./normativa.f1?antiCache="+antiCache);
         opcionesMenu.add(menuItem);
 
