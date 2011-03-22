@@ -43,6 +43,9 @@ public class ResultadoCarrera implements PantallaWeb {
                 if(indicadorContabilizacion==null) indicadorContabilizacion="";
                 if(indicadorContabilizacion.equals("S")){
                     System.out.println("Lanzamos clase de contabilización.");
+                    String carrera=request.getParameter("carrera");
+                    String[] param={carrera};
+                    f1sopra.Main.main(param);
                     mensajeConfirm+=" y contabilizada";
                 }
             } catch (SQLException ex) {
