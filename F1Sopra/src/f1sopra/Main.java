@@ -230,9 +230,9 @@ public class Main {
         String p3r = (String) clasifCarrera.get(Puestos.TERCERO);
 
         if (p1u.equalsIgnoreCase(p1r) && p2u.equalsIgnoreCase(p2r) && p3u.equalsIgnoreCase(p3r)) {
-            clasifUsuario.remove(Puestos.PRIMERO);
-            clasifUsuario.remove(Puestos.SEGUNDO);
-            clasifUsuario.remove(Puestos.TERCERO);
+            //clasifUsuario.remove(Puestos.PRIMERO);
+            //clasifUsuario.remove(Puestos.SEGUNDO);
+            //clasifUsuario.remove(Puestos.TERCERO);
             System.out.println("Acierta podium");
             return Puntos.PODIUM;
         } else {
