@@ -5,6 +5,7 @@
 
 package com.formula1.manejadoras;
 
+import com.formula1.comunes.AccesosBBDD;
 import com.formula1.comunes.BaseDeDatos;
 import com.formula1.comunes.DatosPantalla;
 import com.formula1.comunes.PantallaWeb;
@@ -37,7 +38,7 @@ public class ResultadoCarrera implements PantallaWeb {
         if(accion.equals("guardar")){
             String mensajeConfirm="";
             try {
-                guardarResultadoCarreraSQL(request);
+                guardarResultadoCarrera(request);
                 mensajeConfirm+="Carrera guardada";
                 String indicadorContabilizacion=request.getParameter("chCont");
                 if(indicadorContabilizacion==null) indicadorContabilizacion="";
@@ -45,7 +46,7 @@ public class ResultadoCarrera implements PantallaWeb {
                     System.out.println("Lanzamos clase de contabilización.");
                     String carrera=request.getParameter("carrera");
                     String[] param={carrera};
-                    f1sopra.Main.main(param);
+                    com.formula1.contabilizar.Main.main(param);
                     mensajeConfirm+=" y contabilizada";
                 }
             } catch (SQLException ex) {
@@ -61,11 +62,11 @@ public class ResultadoCarrera implements PantallaWeb {
         
         try{
             
-            pilotos = getDatosPilotosSQL();
+            pilotos = AccesosBBDD.getDatosPilotosSQL("ACTIVO");
             request.setAttribute("pilotos", pilotos);
-            ultimaCarreraDisputada=getCarreraAnteriorSQL();
+            ultimaCarreraDisputada=AccesosBBDD.getCarreraAnteriorSQL();
             request.setAttribute("ultimaCarreraDisputada", ultimaCarreraDisputada);
-            carreras=getDatosCarrerasSQL();
+            carreras=AccesosBBDD.getDatosCarrerasSQL();
             request.setAttribute("carreras", carreras);
 
         } catch (SQLException ex) {
@@ -78,83 +79,8 @@ public class ResultadoCarrera implements PantallaWeb {
         return request;
     }
 
-    public ArrayList getDatosPilotosSQL() throws SQLException {
-        System.out.println(this.getClass().getName()+".getDatosPilotosSQL()");
-        BaseDeDatos bbdd = new BaseDeDatos();
-        Connection conexion = bbdd.establecerConexion();
-        String query="SELECT * FROM pilotos WHERE estado='ACTIVO' ORDER BY numero";
-
-        Statement s = conexion.createStatement();
-        ResultSet rs = s.executeQuery (query);
-
-        ArrayList datosRecuperados = new ArrayList();
-
-        if(rs!=null){
-            while(rs.next()){
-                HashMap registroRecuperado=new HashMap();
-                registroRecuperado.put("numero", rs.getString("numero"));
-                registroRecuperado.put("nombre", rs.getString("nombre"));
-                datosRecuperados.add(registroRecuperado);
-            }
-        }
-
-        return datosRecuperados;
-    }
-
-    public ArrayList getDatosCarrerasSQL() throws SQLException {
-        System.out.println(this.getClass().getName()+".getDatosCarrerasSQL()");
-        BaseDeDatos bbdd = new BaseDeDatos();
-        Connection conexion = bbdd.establecerConexion();
-        String query="SELECT identificador, nombre FROM carreras ORDER BY identificador ASC";
-
-        Statement s = conexion.createStatement();
-        ResultSet rs = s.executeQuery (query);
-
-        ArrayList datosRecuperados = new ArrayList();
-
-        if(rs!=null){
-            while(rs.next()){
-                HashMap registroRecuperado=new HashMap();
-                registroRecuperado.put("identificador", rs.getString("identificador"));
-                registroRecuperado.put("nombre", rs.getString("nombre"));
-                datosRecuperados.add(registroRecuperado);
-            }
-        }
-
-        return datosRecuperados;
-    }
-
-    public String getCarreraAnteriorSQL() throws SQLException {
-        System.out.println(this.getClass().getName()+".getCarreraAnteriorSQL()");
-        BaseDeDatos bbdd = new BaseDeDatos();
-        Connection conexion = bbdd.establecerConexion();
-
-        Calendar c = Calendar.getInstance();
-        String dia = Integer.toString(c.get(Calendar.DATE));
-        String mes = Integer.toString(c.get(Calendar.MONTH)+1);
-        String annio = Integer.toString(c.get(Calendar.YEAR));
-
-        String fecha_hoy=annio+"-"+mes+"-"+dia;
-        String query="SELECT * FROM carreras WHERE fecha_carrera = (SELECT max(fecha_carrera)FROM carreras WHERE fecha_carrera <= '"+fecha_hoy+"')";
-
-        Statement s = conexion.createStatement();
-        ResultSet rs = s.executeQuery (query);
-        String ultimaCarreraDisputada="";
-
-        if(rs!=null){
-                while(rs.next()){
-                    ultimaCarreraDisputada=rs.getString("identificador");
-                    if(ultimaCarreraDisputada==null)ultimaCarreraDisputada="";
-                }
-        }
-
-        return ultimaCarreraDisputada;
-    }
-
-    public int guardarResultadoCarreraSQL(HttpServletRequest request) throws SQLException {
-        System.out.println(this.getClass().getName()+".guardarResultadoCarreraSQL()");
-        BaseDeDatos bbdd = new BaseDeDatos();
-        Connection conexion = bbdd.establecerConexion();
+    public void guardarResultadoCarrera(HttpServletRequest request) throws SQLException {
+        System.out.println(this.getClass().getName()+".guardarResultadoCarrera()");
 
         String carrera=request.getParameter("carrera");
         String pole=request.getParameter("pole");
@@ -182,14 +108,6 @@ public class ResultadoCarrera implements PantallaWeb {
         if(noveno==null) noveno="";
         if(decimo==null) decimo="";
 
-        String query="INSERT INTO resultado_real_carreras (identificador,pole,primero,segundo,tercero,cuarto,quinto,sexto,septimo,octavo,noveno,decimo) "
-                + "VALUES ("+carrera+", '"+pole+"', '"+primero+"', '"+segundo+"', '"+tercero+"', '"+cuarto+"', '"+quinto+"', '"+sexto+"', '"+septimo+"', '"+octavo+"', '"+noveno+"', '"+decimo+"') "
-                + "ON DUPLICATE KEY "
-                + "UPDATE identificador="+carrera+", pole='"+pole+"', primero='"+primero+"', segundo='"+segundo+"', tercero='"+tercero+"', cuarto='"+cuarto+"', quinto='"+quinto+"', sexto='"+sexto+"', septimo='"+septimo+"', octavo='"+octavo+"', noveno='"+noveno+"', decimo='"+decimo+"'";
-        
-        Statement s = conexion.createStatement();
-        int i = s.executeUpdate(query);
-
-        return i;
+        AccesosBBDD.guardarResultadoCarreraSQL(carrera, pole, primero, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, noveno, decimo);
     }
 }

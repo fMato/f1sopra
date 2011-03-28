@@ -39,7 +39,7 @@ long antiCache=System.currentTimeMillis();
         </p>
         <p>
             <label class="loginLabel" for="pass_login">Contrase&ntilde;a:</label>
-            <input type="password" name="pass_login" id="pass_login" maxlength="12" value="" onkeyup="document.frmDatosLogin.pass_login_encrpt.value=SHA1(this.value);"/>
+            <input type="password" name="pass_login" id="pass_login" maxlength="40" value="" onkeyup="document.frmDatosLogin.pass_login_encrpt.value=SHA1(this.value);"/>
             &#160;<a href="#" onClick="enviarLogin();" class="enlacef1" title="Identificarse">Entrar</a>
         </p>
         <p>

@@ -1,9 +1,11 @@
 <%
 String error = (String) request.getAttribute("ERROR");
 %>
-<h1>Error</h1>
 <BR />
 <BR />
-<p>
-    <%=error%>
-</p>
+<div align="center">
+    <div class="contenedorError">
+        <div class="tituloError">Error</div>
+        <div class="contenidoError"><%=error%></div>
+    </div>
+</div>

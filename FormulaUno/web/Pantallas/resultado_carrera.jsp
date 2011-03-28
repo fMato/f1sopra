@@ -7,8 +7,10 @@ long antiCache=System.currentTimeMillis();
 <script type="text/javascript">
     var mensaje="";
     function guardarResultado(){
-        if(validarApuesta())
+        if(validarApuesta()){
+            document.getElementById("semiTransp").style.display="inline";
             document.frmDatos.submit();
+        }
         else
             alert(mensaje);
     }
@@ -166,3 +168,9 @@ long antiCache=System.currentTimeMillis();
     <%}%>
 </div>
 </FORM>
+
+<div id="semiTransp">
+    <BR /><BR /><BR />
+    Estamos contabilizando los puntos,<BR /> esto puede tardar unos segundos, espera por favor...<BR /><BR />
+    <img src="./Imagenes/otras/espera.gif" alt="espera..."/>
+</div>

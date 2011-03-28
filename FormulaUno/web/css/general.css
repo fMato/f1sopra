@@ -206,7 +206,6 @@ p label.apuestaAnteriorLabel{
     font-size:12px;
     text-align: center;
     display: none;
-    z-index: 100;
     
 }
 * html #semiTransp {
@@ -245,4 +244,19 @@ p label.apuestaAnteriorLabel{
 p label.tabulacion{
     width:20px;
     float:left;
+}
+.contenedorError{
+    width:400px;
+    border:solid 1px #000;
+}
+.tituloError{
+    text-align:center;
+    font-weight:bold;
+    background-color:#666666;
+    padding:5px;
+    color:#fff;
+}
+.contenidoError{
+    text-align:center;
+    padding:5px;
 }

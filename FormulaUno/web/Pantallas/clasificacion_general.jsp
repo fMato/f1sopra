@@ -34,7 +34,7 @@ if(datosPersonaSesion!=null)
         <TH>PT</TH>
     </TR>
 <%
-ArrayList pilotosOrdenados = (ArrayList)request.getAttribute("pilotosOrdenados");
+ArrayList usuariosOrdenados = (ArrayList)request.getAttribute("usuariosOrdenados");
 HashMap datosClasifGeneral = (HashMap) request.getAttribute("datosClasifGeneral");
 HashMap puntosMaximos = (HashMap) request.getAttribute("puntosMaximos");
 
@@ -78,50 +78,50 @@ String puntosMax19=(String)puntosMaximos.get("19");
 if(puntosMax19==null)puntosMax19="0";
 
 
-for(int i=0; i<pilotosOrdenados.size();i++){
-    String usuario = (String)pilotosOrdenados.get(i);
-    HashMap datosUnPiloto = (HashMap)datosClasifGeneral.get(usuario);
-    String nombre=(String)datosUnPiloto.get("nombre");
+for(int i=0; i<usuariosOrdenados.size();i++){
+    String usuario = (String)usuariosOrdenados.get(i);
+    HashMap datosUnUsuario = (HashMap)datosClasifGeneral.get(usuario);
+    String nombre=(String)datosUnUsuario.get("nombre");
     if(nombre==null)nombre=usuario;
-    String carrera1=(String)datosUnPiloto.get("1");
+    String carrera1=(String)datosUnUsuario.get("1");
     if(carrera1==null)carrera1="-";
-    String carrera2=(String)datosUnPiloto.get("2");
+    String carrera2=(String)datosUnUsuario.get("2");
     if(carrera2==null)carrera2="-";
-    String carrera3=(String)datosUnPiloto.get("3");
+    String carrera3=(String)datosUnUsuario.get("3");
     if(carrera3==null)carrera3="-";
-    String carrera4=(String)datosUnPiloto.get("4");
+    String carrera4=(String)datosUnUsuario.get("4");
     if(carrera4==null)carrera4="-";
-    String carrera5=(String)datosUnPiloto.get("5");
+    String carrera5=(String)datosUnUsuario.get("5");
     if(carrera5==null)carrera5="-";
-    String carrera6=(String)datosUnPiloto.get("6");
+    String carrera6=(String)datosUnUsuario.get("6");
     if(carrera6==null)carrera6="-";
-    String carrera7=(String)datosUnPiloto.get("7");
+    String carrera7=(String)datosUnUsuario.get("7");
     if(carrera7==null)carrera7="-";
-    String carrera8=(String)datosUnPiloto.get("8");
+    String carrera8=(String)datosUnUsuario.get("8");
     if(carrera8==null)carrera8="-";
-    String carrera9=(String)datosUnPiloto.get("9");
+    String carrera9=(String)datosUnUsuario.get("9");
     if(carrera9==null)carrera9="-";
-    String carrera10=(String)datosUnPiloto.get("10");
+    String carrera10=(String)datosUnUsuario.get("10");
     if(carrera10==null)carrera10="-";
-    String carrera11=(String)datosUnPiloto.get("11");
+    String carrera11=(String)datosUnUsuario.get("11");
     if(carrera11==null)carrera11="-";
-    String carrera12=(String)datosUnPiloto.get("12");
+    String carrera12=(String)datosUnUsuario.get("12");
     if(carrera12==null)carrera12="-";
-    String carrera13=(String)datosUnPiloto.get("13");
+    String carrera13=(String)datosUnUsuario.get("13");
     if(carrera13==null)carrera13="-";
-    String carrera14=(String)datosUnPiloto.get("14");
+    String carrera14=(String)datosUnUsuario.get("14");
     if(carrera14==null)carrera14="-";
-    String carrera15=(String)datosUnPiloto.get("15");
+    String carrera15=(String)datosUnUsuario.get("15");
     if(carrera15==null)carrera15="-";
-    String carrera16=(String)datosUnPiloto.get("16");
+    String carrera16=(String)datosUnUsuario.get("16");
     if(carrera16==null)carrera16="-";
-    String carrera17=(String)datosUnPiloto.get("17");
+    String carrera17=(String)datosUnUsuario.get("17");
     if(carrera17==null)carrera17="-";
-    String carrera18=(String)datosUnPiloto.get("18");
+    String carrera18=(String)datosUnUsuario.get("18");
     if(carrera18==null)carrera18="-";
-    String carrera19=(String)datosUnPiloto.get("19");
+    String carrera19=(String)datosUnUsuario.get("19");
     if(carrera19==null)carrera19="-";
-    String total=(String)datosUnPiloto.get("total");
+    String total=(String)datosUnUsuario.get("total");
     if(total==null)total="0";
     %>
     <TR <%if(usuarioSesion.equals(usuario)){%>class="filaSel"<%}%>>

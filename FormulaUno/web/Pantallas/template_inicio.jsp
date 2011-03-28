@@ -6,8 +6,13 @@
 
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
+response.setDateHeader("Expires",-1);
+response.setHeader("Pragma","no-cache");
+if(request.getProtocol().equals("HTTP/1.1"))
+response.setHeader("Cache-Control","no-cache");
+
 String titulo = (String) request.getAttribute("tituloPantalla");
 String pantallaContenido = (String) request.getAttribute("jspPresentacion");
 %>
@@ -16,7 +21,7 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="shortcut icon" href="./Imagenes/otras/favicon2.ico">
         <title><%=titulo%></title>
         <link rel="stylesheet" type="text/css" href="./css/general.css" />
@@ -61,18 +66,23 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
                     %>
                     <BR />
                     <BR />
-                    <p><a href="./desconectar.f1?antiCache=<%=antiCache%>" class="linkAdmin">Cerrar sesiÃ³n</a></p>
+                    <p><a href="./desconectar.f1?antiCache=<%=antiCache%>" class="linkAdmin">Cerrar sesión</a></p>
                     <%}%>
             </div> <!-- fin .menuLateral -->
             <div class="contenido">
                 <!-- Include del jsp con el contenido -->
+                <%try{%>
                 <jsp:include page='<%=pantallaContenido%>' flush="false"/>
+                <%}catch (Exception spe){
+                System.out.println("Error al pintar el jsp");%>
+                <jsp:include page='./error_jsp.jsp' flush="false"/>
+               <% }%>
             </div><!-- fin .contenido -->
 
 
             <div class="menuLateral"></div>
             <div class="pie">
-                PÃ¡gina optimizada para Mozilla-Firefox. Para cualquier problema contactar con <a href="mailto:francisco.mato@gmail.com">Francisco Mato</a> o <a href="mailto:fuensa82@gmail.com">Victor Palomo</a>.
+                Página optimizada para Mozilla-Firefox. Para cualquier problema contactar con <a href="mailto:francisco.mato@gmail.com">Francisco Mato</a> o <a href="mailto:fuensa82@gmail.com">Victor Palomo</a>.
             </div>
         </div><!-- fin .container -->
     </body>

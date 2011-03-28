@@ -1,14 +1,11 @@
 package com.formula1.manejadoras;
 
-import com.formula1.comunes.BaseDeDatos;
+import com.formula1.comunes.AccesosBBDD;
 import com.formula1.comunes.DatosPantalla;
 import com.formula1.comunes.DatosPersona;
 import com.formula1.comunes.PantallaWeb;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +31,7 @@ public class LoginHandler implements PantallaWeb{
 
             HashMap consulta=new HashMap();
             try {
-                consulta = getDatosUsuarioSQL(usuario);
+                consulta = AccesosBBDD.getDatosUsuarioSQL(usuario);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -73,7 +70,7 @@ public class LoginHandler implements PantallaWeb{
                 session.invalidate();
                 datosPantalla.setJsp("./error.jsp");
                 datosPantalla.setTitulo("Error");
-                request.setAttribute("ERROR", "Ha ocurrido un error al intentar conectarte. Por favor comprueba tu usuario y contraseña y vuelve a intentarlo.");
+                request.setAttribute("ERROR", "Ha ocurrido un error al intentar conectarte.<BR />Por favor comprueba tu usuario y contraseña y vuelve a intentarlo.");
             }
 
         }else{
@@ -83,34 +80,6 @@ public class LoginHandler implements PantallaWeb{
         }
         
         return request;
-    }
-
-    public HashMap getDatosUsuarioSQL(String usuario) throws SQLException {
-        System.out.println(this.getClass().getName()+".getDatosUsuarioSQL()");
-        BaseDeDatos bbdd = new BaseDeDatos();
-        Connection conexion = bbdd.establecerConexion();
-        System.out.println("Conexión con la base de datos ok.");
-        String query="SELECT * FROM usuarios WHERE nick='"+usuario+"'";
-
-        Statement s = conexion.createStatement();
-        ResultSet rs = s.executeQuery (query);
-
-        HashMap datosRecuperados=new HashMap();
-
-        if(rs!=null){
-            rs.next();
-            datosRecuperados.put("nick", rs.getString("nick"));
-            datosRecuperados.put("pass", rs.getString("pass"));
-            datosRecuperados.put("nombre", rs.getString("nombre"));
-            datosRecuperados.put("tipo", rs.getString("tipo_usuario"));
-            datosRecuperados.put("correo", rs.getString("correo"));
-            System.out.println("Nick: "+rs.getString("nick"));
-            System.out.println("Nombre: "+rs.getString("nombre"));
-            System.out.println("Tipo: "+rs.getString("tipo_usuario"));
-
-        }
-
-        return datosRecuperados;
     }
 
 }

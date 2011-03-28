@@ -5,6 +5,7 @@
 
 package com.formula1.manejadoras;
 
+import com.formula1.comunes.AccesosBBDD;
 import com.formula1.comunes.BaseDeDatos;
 import com.formula1.comunes.DatosPantalla;
 import com.formula1.comunes.DatosPersona;
@@ -32,7 +33,7 @@ public class RecuperarMisDatos implements PantallaWeb{
 
         HashMap datosUsuario = new HashMap();
         try {
-            datosUsuario = getDatosUsuarioSQL(usuarioSession);
+            datosUsuario = AccesosBBDD.getDatosUsuarioSQL(usuarioSession);
         } catch (SQLException ex) {
             System.out.println("Error al recuperar los datos de "+usuarioSession+".");
             datosPantalla.setJsp("./error.jsp");
@@ -43,29 +44,5 @@ public class RecuperarMisDatos implements PantallaWeb{
         request.setAttribute("datosUsuario", datosUsuario);
 
         return request;
-    }
-
-    public HashMap getDatosUsuarioSQL(String nick) throws SQLException {
-        System.out.println(this.getClass().getName()+".getDatosUsuarioSQL()");
-        BaseDeDatos bbdd = new BaseDeDatos();
-        Connection conexion = bbdd.establecerConexion();
-        String query="SELECT * FROM usuarios WHERE nick='"+nick+"'";
-
-        Statement s = conexion.createStatement();
-        ResultSet rs = s.executeQuery (query);
-
-        HashMap datosUsuario = new HashMap();
-
-        if(rs!=null){
-            while(rs.next()){
-                datosUsuario.put("nick", rs.getString("nick"));
-                datosUsuario.put("nombre", rs.getString("nombre"));
-                datosUsuario.put("correo", rs.getString("correo"));
-                datosUsuario.put("pass", rs.getString("pass"));
-            }
-        }
-        bbdd.cerrarConexion(conexion);
-
-        return datosUsuario;
     }
 }

@@ -1,5 +1,6 @@
 package com.formula1.servlet;
 
+import com.formula1.comunes.AccesosBBDD;
 import com.formula1.comunes.DatosPantalla;
 import com.formula1.comunes.DatosPersona;
 import com.formula1.comunes.PantallaWeb;
@@ -52,7 +53,13 @@ public class ServletPrincipal extends HttpServlet {
             pantalla=getPantalla(request.getServletPath()); // Recuperamos la orden introducida por el usuario.
             if(pantalla==null) pantalla="";
 
-            setMenu(request,session);
+            try{
+                recuperaMenu(request,session);
+            }catch(Exception ex){
+                datosPantalla.setJsp("./error.jsp");
+                datosPantalla.setTitulo("Error");
+                request.setAttribute("ERROR", "Ha ocurrido un error al intentar cargar la pantalla solicitada. Por favor comprueba que la dirección introducida es correcta o avisa al administrador.");
+            }
 
             if(hayUsuarioSesion.equals("S") || pantalla.equals("hacerLogin")){   
                 
@@ -137,49 +144,26 @@ public class ServletPrincipal extends HttpServlet {
      * @param request
      * @throws SQLException
      */
-    public void setMenu(HttpServletRequest request,HttpSession session){
+    public void recuperaMenu(HttpServletRequest request,HttpSession session) throws SQLException{
         System.out.println("Empieza el tratamiento del menú");
-        ArrayList opcionesMenu = new ArrayList();
-        long antiCache=System.currentTimeMillis();
-
-        HashMap menuItem = new HashMap();
-        menuItem.put("texto", "Mi próxima apuesta.");
-        menuItem.put("url", "./proxApuesta.f1?antiCache="+antiCache);
-        opcionesMenu.add(menuItem);
-
-        menuItem = new HashMap();
-        menuItem.put("texto", "Clasificación general.");
-        menuItem.put("url", "./clasifGeneral.f1?antiCache="+antiCache);
-        opcionesMenu.add(menuItem);
-
-        menuItem = new HashMap();
-        menuItem.put("texto", "Apuestas anteriores.");
-        menuItem.put("url", "./apuestasAnt.f1?antiCache="+antiCache);
-        opcionesMenu.add(menuItem);
-
-        menuItem = new HashMap();
-        menuItem.put("texto", "Mis datos.");
-        menuItem.put("url", "./misDatos.f1?antiCache="+antiCache);
-        opcionesMenu.add(menuItem);
-
-        menuItem = new HashMap();
-        menuItem.put("texto", "Normas.");
-        menuItem.put("url", "./normativa.f1?antiCache="+antiCache);
-        opcionesMenu.add(menuItem);
 
         DatosPersona datosPersona = (DatosPersona) session.getAttribute("datosPersona");
-        if(datosPersona!=null && datosPersona.getTipoUsuario().equals("A")){
-            System.out.println("Opciones de administración");
-            menuItem = new HashMap();
-            menuItem.put("texto", "Alta de usuario.");
-            menuItem.put("url", "./inicioAltaUsuario.f1?antiCache="+antiCache);
-            opcionesMenu.add(menuItem);
+        String tipoUsuario="";
+        if(datosPersona!=null)
+            tipoUsuario=datosPersona.getTipoUsuario();
+        else
+            tipoUsuario="U";
 
-            menuItem = new HashMap();
-            menuItem.put("texto", "Informar resultado.");
-            menuItem.put("url", "./resultadoCarrera.f1?antiCache="+antiCache);
-            opcionesMenu.add(menuItem);
-        }
+        if(tipoUsuario==null) tipoUsuario="U";
+
+        if(tipoUsuario.equals("A"))
+            System.out.println("Cargamos el menú con opciones de administración.");
+        else
+            System.out.println("Cargamos el menú sin opciones de administración para perfil "+tipoUsuario+".");
+
+        ArrayList opcionesMenu = new ArrayList();
+
+        opcionesMenu=AccesosBBDD.getMenu(tipoUsuario);
 
         // Añadimos los datos del menú al request.
         request.setAttribute("opcionesMenu", opcionesMenu);
