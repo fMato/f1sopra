@@ -16,8 +16,7 @@ response.setHeader("Cache-Control","no-cache");
 String titulo = (String) request.getAttribute("tituloPantalla");
 String pantallaContenido = (String) request.getAttribute("jspPresentacion");
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
     <head>
@@ -28,7 +27,7 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
         <script type="text/javascript" src="./javascript/comues.js"></script>
     </head>
     <body onload="muestraReloj()">
-        <div align="center">
+        <div align="center" style="font-size:0px;">
             <img src="./Imagenes/cabeceraf1.jpg" alt="Formula Uno Sopra 2011"/>
         </div>
         <div class="container">
@@ -65,8 +64,7 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
                         long antiCache=System.currentTimeMillis();
                     %>
                     <BR />
-                    <BR />
-                    <p><a href="./desconectar.f1?antiCache=<%=antiCache%>" class="linkAdmin">Cerrar sesión</a></p>
+                    <a href="./desconectar.f1?antiCache=<%=antiCache%>" class="linkAdmin">Cerrar sesión</a>
                     <%}%>
             </div> <!-- fin .menuLateral -->
             <div class="contenido">
@@ -85,5 +83,6 @@ String pantallaContenido = (String) request.getAttribute("jspPresentacion");
                 Página optimizada para Mozilla-Firefox. Para cualquier problema contactar con <a href="mailto:francisco.mato@gmail.com">Francisco Mato</a> o <a href="mailto:fuensa82@gmail.com">Victor Palomo</a>.
             </div>
         </div><!-- fin .container -->
+        <div id="contenidoAjax"></div>
     </body>
 </html>

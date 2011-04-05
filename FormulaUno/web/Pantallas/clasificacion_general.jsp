@@ -1,3 +1,4 @@
+<script type="text/javascript" src="./javascript/clasificacion_general.js"></script>
 <%@page import="com.formula1.comunes.DatosPersona"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
@@ -9,7 +10,8 @@ if(datosPersonaSesion!=null)
 %>
 <h1>Clasificación general</h1>
 <BR />
-<table id="tablaGeneral" border="0" width="100%">
+<p style="font-size: 10px;">(* Situa el cursor encima de una puntuación y te mostrará la clasificación de ese usuario para esa carrera.)</p>
+<table id="tablaGeneral" border="0" width="96%" align="center">
     <TR>
         <TH></TH>
         <TH><img src="./Imagenes/banderas/01.png" alt="Australia" title="Australia" width="20px"/></TH>
@@ -126,28 +128,30 @@ for(int i=0; i<usuariosOrdenados.size();i++){
     %>
     <TR <%if(usuarioSesion.equals(usuario)){%>class="filaSel"<%}%>>
         <TD><%=nombre%></TD>
-        <TD align="center" <%if(puntosMax1.equals(carrera1)){%>class="maxPunt"<%}%>><%=carrera1%></TD>
-        <TD align="center" <%if(puntosMax2.equals(carrera2)){%>class="maxPunt"<%}%>><%=carrera2%></TD>
-        <TD align="center" <%if(puntosMax3.equals(carrera3)){%>class="maxPunt"<%}%>><%=carrera3%></TD>
-        <TD align="center" <%if(puntosMax4.equals(carrera4)){%>class="maxPunt"<%}%>><%=carrera4%></TD>
-        <TD align="center" <%if(puntosMax5.equals(carrera5)){%>class="maxPunt"<%}%>><%=carrera5%></TD>
-        <TD align="center" <%if(puntosMax6.equals(carrera6)){%>class="maxPunt"<%}%>><%=carrera6%></TD>
-        <TD align="center" <%if(puntosMax7.equals(carrera7)){%>class="maxPunt"<%}%>><%=carrera7%></TD>
-        <TD align="center" <%if(puntosMax8.equals(carrera8)){%>class="maxPunt"<%}%>><%=carrera8%></TD>
-        <TD align="center" <%if(puntosMax9.equals(carrera9)){%>class="maxPunt"<%}%>><%=carrera9%></TD>
-        <TD align="center" <%if(puntosMax10.equals(carrera10)){%>class="maxPunt"<%}%>><%=carrera10%></TD>
-        <TD align="center" <%if(puntosMax11.equals(carrera11)){%>class="maxPunt"<%}%>><%=carrera11%></TD>
-        <TD align="center" <%if(puntosMax12.equals(carrera12)){%>class="maxPunt"<%}%>><%=carrera12%></TD>
-        <TD align="center" <%if(puntosMax13.equals(carrera13)){%>class="maxPunt"<%}%>><%=carrera13%></TD>
-        <TD align="center" <%if(puntosMax14.equals(carrera14)){%>class="maxPunt"<%}%>><%=carrera14%></TD>
-        <TD align="center" <%if(puntosMax15.equals(carrera15)){%>class="maxPunt"<%}%>><%=carrera15%></TD>
-        <TD align="center" <%if(puntosMax16.equals(carrera16)){%>class="maxPunt"<%}%>><%=carrera16%></TD>
-        <TD align="center" <%if(puntosMax17.equals(carrera17)){%>class="maxPunt"<%}%>><%=carrera17%></TD>
-        <TD align="center" <%if(puntosMax18.equals(carrera18)){%>class="maxPunt"<%}%>><%=carrera18%></TD>
-        <TD align="center" <%if(puntosMax19.equals(carrera19)){%>class="maxPunt"<%}%>><%=carrera19%></TD>
-        <TD align="center"><%=total%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax1.equals(carrera1)){%>class="maxPunt"<%} if(!carrera1.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','1',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera1%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax2.equals(carrera2)){%>class="maxPunt"<%} if(!carrera2.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','2',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera2%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax3.equals(carrera3)){%>class="maxPunt"<%} if(!carrera3.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','3',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera3%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax4.equals(carrera4)){%>class="maxPunt"<%} if(!carrera4.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','4',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera4%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax5.equals(carrera5)){%>class="maxPunt"<%} if(!carrera5.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','5',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera5%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax6.equals(carrera6)){%>class="maxPunt"<%} if(!carrera6.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','6',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera6%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax7.equals(carrera7)){%>class="maxPunt"<%} if(!carrera7.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','7',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera7%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax8.equals(carrera8)){%>class="maxPunt"<%} if(!carrera8.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','8',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera8%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax9.equals(carrera9)){%>class="maxPunt"<%} if(!carrera9.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','9',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera9%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax10.equals(carrera10)){%>class="maxPunt"<%} if(!carrera10.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','10',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera10%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax11.equals(carrera11)){%>class="maxPunt"<%} if(!carrera11.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','11',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera11%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax12.equals(carrera12)){%>class="maxPunt"<%} if(!carrera12.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','12',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera12%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax13.equals(carrera13)){%>class="maxPunt"<%} if(!carrera13.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','13',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera13%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax14.equals(carrera14)){%>class="maxPunt"<%} if(!carrera14.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','14',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera14%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax15.equals(carrera15)){%>class="maxPunt"<%} if(!carrera15.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','15',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera15%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax16.equals(carrera16)){%>class="maxPunt"<%} if(!carrera16.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','16',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera16%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax17.equals(carrera17)){%>class="maxPunt"<%} if(!carrera17.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','17',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera17%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax18.equals(carrera18)){%>class="maxPunt"<%} if(!carrera18.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','18',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera18%></TD>
+        <TD align="center" style="cursor: default;" <%if(puntosMax19.equals(carrera19)){%>class="maxPunt"<%} if(!carrera19.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','19',event,this);" onmouseout="cancelarBusqueda();"<%}%>><%=carrera19%></TD>
+        <TD align="center" style="cursor: default;"><%=total%></TD>
     </TR>
 <%
 }
 %>
 </table>
+
+<div id="contenidoAjax"></div>

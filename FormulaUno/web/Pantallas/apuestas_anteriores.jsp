@@ -9,7 +9,7 @@ if(datosPersonaSesion!=null)
 %>
 <h1>Consultar apuestas anteriores.</h1>
 <BR />
-<table id="tablaGeneral" border="0" width="100%">
+<table id="tablaGeneral" border="0" width="96%" align="center">
     <TR>
         <TH></TH>
         <TH><img src="./Imagenes/banderas/01.png" alt="GP de Australia" title="GP de Australia" width="20px"/></TH>

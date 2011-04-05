@@ -29,11 +29,11 @@ a img {
 
 /* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
 a:link {
-	color: #ffffff;
+	color: #0000ff;
 	text-decoration: underline;
 }
 a:visited {
-	color: #ffffff;
+	color: #0000ff;
 	text-decoration: underline;
 }
 a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
@@ -179,6 +179,11 @@ p label.apuestaAnteriorLabel{
 	width:90px;
 	float:left;
 	}
+label.apuestaAnteriorLabelMini{
+	width:70px;
+	float:left;
+        font-size: 10px;
+	}
 #semiTransp2{
     overflow: auto;
     color:#fff;
@@ -259,4 +264,14 @@ p label.tabulacion{
 .contenidoError{
     text-align:center;
     padding:5px;
+}
+#contenidoAjax
+{
+    position: absolute;
+    display:none;
+    border:solid 1px #000;
+    width: 220px;
+    font-size: 10px;
+    padding: 5px;
+    background-color: #ccffcc;
 }

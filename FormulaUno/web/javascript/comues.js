@@ -190,3 +190,58 @@ function muestraReloj(){
 
 	setTimeout("muestraReloj()",1000)
 }
+function findPosX(obj)
+  {
+    var curleft = 0;
+    if(obj.offsetParent)
+        while(1){
+          curleft += obj.offsetLeft;
+          if(!obj.offsetParent)
+            break;
+          obj = obj.offsetParent;
+        }
+    else if(obj.x)
+        curleft += obj.x;
+    return curleft;
+  }
+
+function findPosY(obj)
+  {
+    var curtop = 0;
+    if(obj.offsetParent)
+        while(1){
+          curtop += obj.offsetTop;
+          if(!obj.offsetParent)
+            break;
+          obj = obj.offsetParent;
+        }
+    else if(obj.y)
+        curtop += obj.y;
+    return curtop;
+  }
+var READY_STATE_UNINITIALIZED=0;
+var READY_STATE_LOADING=1;
+var READY_STATE_LOADED=2;
+var READY_STATE_INTERACTIVE=3;
+var READY_STATE_COMPLETE=4;
+
+var peticion_http;
+
+function cargaContenido(url, metodo, funcion) {
+  peticion_http = inicializa_xhr();
+
+  if(peticion_http) {
+    peticion_http.onreadystatechange = funcion;
+    peticion_http.open(metodo, url, true);
+    peticion_http.send(null);
+  }
+}
+
+function inicializa_xhr() {
+  if(window.XMLHttpRequest) {
+    return new XMLHttpRequest();
+  }
+  else if(window.ActiveXObject) {
+    return new ActiveXObject("Microsoft.XMLHTTP");
+  }
+}

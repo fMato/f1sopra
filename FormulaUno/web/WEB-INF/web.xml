@@ -4,9 +4,21 @@
         <servlet-name>ServletPrincipal</servlet-name>
         <servlet-class>com.formula1.servlet.ServletPrincipal</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAjax</servlet-name>
+        <servlet-class>com.formula1.servlet.ServletAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletPrincipal</servlet-name>
         <url-pattern>*.f1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAjax</servlet-name>
+        <url-pattern>*.ajax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAjax</servlet-name>
+        <url-pattern>/ServletAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
