@@ -1,14 +1,10 @@
 package com.formula1.servlet;
 
-import com.formula1.comunes.AccesosBBDD;
 import com.formula1.comunes.DatosPantalla;
-import com.formula1.comunes.DatosPersona;
 import com.formula1.comunes.PantallaWeb;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

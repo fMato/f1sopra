@@ -9,45 +9,50 @@ function muestraContenido() {
   }
 }
 
-function buscaClasificacion(usuario, carrera, tempX, tempY) {
+function buscaClasificacion(usuario, carrera) {
     var d = new Date();
+    document.getElementById('contenidoAjax').style.display='block';
     cargaContenido("./apuestaAntAjax.ajax?usuario="+usuario+"&carrera="+carrera+"&antiCache="+d.getTime(), "GET", muestraContenido);
-    posicionaDiv2(tempX, tempY);
 }
 
-function esperaBusqueda(usuario, carrera, event, elem){
+function esperaBusqueda(usuario, carrera){
     document.getElementById("contenidoAjax").innerHTML="<img src='./Imagenes/otras/espera.gif' alt='espera...'/>";
+    peticionRealizada=true;
+
+    idPeticion=setTimeout("buscaClasificacion('"+usuario+"', '"+carrera+"')", 1500);
+}
+
+function mueveDiv(event){
+    //determina un margen de pixels del div al raton
+    margin=5;
+
+    //La variable IE determina si estamos utilizando IE
+    var IE = document.all?true:false;
+    //Si no utilizamos IE capturamos el evento del mouse
+    if (!IE) document.captureEvents(Event.MOUSEMOVE)
+
     var tempX = 0;
     var tempY = 0;
 
-    tempX=findPosX(elem);
-    tempY=findPosY(elem);
-
+    if(IE)
+    { //para IE
+            tempX = event.clientX + document.body.scrollLeft;
+            tempY = event.clientY + document.body.scrollTop;
+    }else{ //para netscape
+            tempX = event.pageX;
+            tempY = event.pageY;
+    }
     if (tempX < 0){tempX = 0;}
-	if (tempY < 0){tempY = 0;}
-    peticionRealizada=true;
+    if (tempY < 0){tempY = 0;}
 
-    if(carrera<9){
-        tempY=tempY-92;
-        tempX=tempX-160;
-        //La variable IE determina si estamos utilizando IE
-	var IE = document.all?true:false;
-        if(IE){
-            tempY=tempY-7;
-            tempX=tempX+4;
-        }
-    }else{
-        tempY=tempY-92;
-        tempX=tempX-410
-        //La variable IE determina si estamos utilizando IE
-	var IE = document.all?true:false;
-        if(IE){
-            tempY=tempY-7;
-            tempX=tempX+12;
-        }
+    tempX+=margin;
+    tempY+=margin;
+    if(parseInt(tempY)>350){
+        tempY=tempY-210;
     }
 
-    idPeticion=setTimeout("buscaClasificacion('"+usuario+"', '"+carrera+"', "+tempX+", "+tempY+")", 1500);
+    document.getElementById('contenidoAjax').style.top = tempY;
+    document.getElementById('contenidoAjax').style.left = tempX;
 }
 
 function cancelarBusqueda(){
@@ -64,33 +69,6 @@ function posicionaDiv2(tempX, tempY)
 
 	document.getElementById('contenidoAjax').style.top = tempY;
 	document.getElementById('contenidoAjax').style.left = tempX;
-	document.getElementById('contenidoAjax').style.display='block';
-	return;
-}
-function posicionaDiv(event)
-{
-	//La variable IE determina si estamos utilizando IE
-	var IE = document.all?true:false;
-	//Si no utilizamos IE capturamos el evento del mouse
-	if (!IE) document.captureEvents(Event.MOUSEMOVE)
-
-	var tempX = 0;
-	var tempY = 0;
-
-	if(IE)
-	{ //para IE
-		tempX = event.clientX;
-		tempY = event.clientY;
-	}else{ //para netscape
-		tempX = event.pageX;
-		tempY = event.pageY;
-	}
-
-	if (tempX < 0){tempX = 0;}
-	if (tempY < 0){tempY = 0;}
-
-	document.getElementById('contenidoAjax').style.top = tempY-100;
-	document.getElementById('contenidoAjax').style.left = tempX-175;
 	document.getElementById('contenidoAjax').style.display='block';
 	return;
 }
