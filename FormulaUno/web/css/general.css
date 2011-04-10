@@ -221,6 +221,7 @@ label.apuestaAnteriorLabelMini{
 }
 #tablaGeneral td{
      border: 1px solid #000000;
+     padding: 2px;
 }
 .pie{
     text-align: center;

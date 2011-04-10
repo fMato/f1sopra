@@ -14,6 +14,7 @@ if(datosPersonaSesion!=null)
 <table id="tablaGeneral" border="0" width="96%" align="center">
     <TR>
         <TH></TH>
+        <TH></TH>
         <TH><img src="./Imagenes/banderas/01.png" alt="Australia" title="Australia" width="20px"/></TH>
         <TH><img src="./Imagenes/banderas/02.png" alt="Malasia" title="Malasia" width="20px"/></TH>
         <TH><img src="./Imagenes/banderas/03.png" alt="China" title="China" width="20px"/></TH>
@@ -79,6 +80,8 @@ if(puntosMax18==null)puntosMax18="0";
 String puntosMax19=(String)puntosMaximos.get("19");
 if(puntosMax19==null)puntosMax19="0";
 
+int pos=1;
+String puntosUsuarioAnt="";
 
 for(int i=0; i<usuariosOrdenados.size();i++){
     String usuario = (String)usuariosOrdenados.get(i);
@@ -125,8 +128,15 @@ for(int i=0; i<usuariosOrdenados.size();i++){
     if(carrera19==null)carrera19="-";
     String total=(String)datosUnUsuario.get("total");
     if(total==null)total="0";
+
+    if(!total.equals(puntosUsuarioAnt)){
+    pos=i+1;
+    }
+
+    puntosUsuarioAnt=total;
     %>
     <TR <%if(usuarioSesion.equals(usuario)){%>class="filaSel"<%}%>>
+        <TD align="right"><b><%=pos%></b>º</TD>
         <TD><%=nombre%></TD>
         <TD align="center" style="cursor: default;" <%if(puntosMax1.equals(carrera1)){%>class="maxPunt"<%} if(!carrera1.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','1');" onmouseout="cancelarBusqueda();" onmousemove="mueveDiv(event);"<%}%>><%=carrera1%></TD>
         <TD align="center" style="cursor: default;" <%if(puntosMax2.equals(carrera2)){%>class="maxPunt"<%} if(!carrera2.equals("-")){%>onmouseover="esperaBusqueda('<%=usuario%>','2');" onmouseout="cancelarBusqueda();" onmousemove="mueveDiv(event);"<%}%>><%=carrera2%></TD>
