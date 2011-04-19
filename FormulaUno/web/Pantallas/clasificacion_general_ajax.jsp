@@ -8,12 +8,6 @@ String usuarioSesion = "";
 if(datosPersonaSesion!=null)
     usuarioSesion=datosPersonaSesion.getNick();
 %>
-<h1>Clasificación</h1>
-<BR />
-<p style="font-size: 10px;">(* Situa el cursor encima de una puntuación y te mostrará la clasificación de ese usuario para esa carrera.)</p>
-<BR />
-<p style="font-size: 10px;">Clasificación ordenada por: <span id="nombreClasificacion" style="font-size: 10px;font-weight:bold;">Clasificación general.</span></p>
-<span id="tablaClasificacion">
 <table id="tablaGeneral" border="0" width="96%" align="center">
     <TR>
         <TH></TH>
@@ -166,9 +160,3 @@ for(int i=0; i<usuariosOrdenados.size();i++){
 }
 %>
 </table>
-</span>
-<div id="semiTransp" style="top:20%">
-    <BR /><BR /><BR />
-    Espera por favor...<BR /><BR />
-    <img src="./Imagenes/otras/espera.gif" alt="espera..."/>
-</div>

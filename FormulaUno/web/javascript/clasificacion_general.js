@@ -72,3 +72,23 @@ function posicionaDiv2(tempX, tempY)
 	document.getElementById('contenidoAjax').style.display='block';
 	return;
 }
+
+function ordenarCarrera(carrera, titulo){
+
+    document.getElementById("semiTransp").style.display="inline";
+    document.getElementById("nombreClasificacion").innerHTML=titulo;
+
+    var d = new Date();
+    cargaContenido("./calsificacionAjax.ajax?ordenarPor="+carrera+"&antiCache="+d.getTime(), "GET", muestraContenidoOrdenado);
+
+}
+
+function muestraContenidoOrdenado() {
+    
+  if(peticion_http.readyState == READY_STATE_COMPLETE) {
+    if(peticion_http.status == 200) {
+      document.getElementById("tablaClasificacion").innerHTML=peticion_http.responseText;
+      document.getElementById("semiTransp").style.display="none";
+    }
+  }
+}

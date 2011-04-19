@@ -924,4 +924,32 @@ public class AccesosBBDD {
 
         return i;
     }
+
+    public static ArrayList getOrdenadosCarreraSQL(String carrera) throws SQLException {
+        System.out.println("Llamada a BBDD: getOrdenadosCarreraSQL()");
+
+        ArrayList usuariosOrdenados=new ArrayList();
+        Connection conexion = BaseDeDatos.establecerConexion();
+        String query="SELECT usuario "
+                + "FROM resultados_apuestas "
+                + "WHERE carrera=? "
+                + "ORDER BY puntos DESC";
+
+        PreparedStatement selectStatement = conexion.prepareStatement(query);
+
+        selectStatement.setString(1, carrera);
+
+        ResultSet rs = selectStatement.executeQuery ();
+
+        if(rs!=null){
+            while(rs.next()){
+                usuariosOrdenados.add(rs.getString("usuario"));
+            }
+        }
+
+        BaseDeDatos.cerrarConexion(conexion);
+
+        return usuariosOrdenados;
+    }
 }
+

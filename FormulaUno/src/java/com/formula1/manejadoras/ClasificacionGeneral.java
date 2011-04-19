@@ -33,8 +33,23 @@ public class ClasificacionGeneral implements PantallaWeb{
             datosClasifGeneral = AccesosBBDD.getPuntosCarrerasSQL(resultadoPuntosTotales);
             puntosMaximos=AccesosBBDD.getPuntosMaximosSQL();
 
-            usuariosOrdenados=(ArrayList)resultadoPuntosTotales.get("ListaUsuariosOrdenados");
+            String ordenarPor=request.getParameter("ordenarPor");
+            if(ordenarPor==null) ordenarPor="";
             
+            if(ordenarPor.equals("") || ordenarPor.equals("PT"))
+                usuariosOrdenados=(ArrayList)resultadoPuntosTotales.get("ListaUsuariosOrdenados");
+            else{
+                ArrayList usuariosOrdenados_aux=AccesosBBDD.getOrdenadosCarreraSQL(ordenarPor);
+
+                if(!usuariosOrdenados_aux.isEmpty()){
+                    usuariosOrdenados=usuariosOrdenados_aux;
+                    resultadoPuntosTotales.put("ListaUsuariosOrdenados",usuariosOrdenados);
+                }else{
+                    usuariosOrdenados=(ArrayList)resultadoPuntosTotales.get("ListaUsuariosOrdenados");
+                }
+                
+            }
+      
         } catch (SQLException ex) {
             System.out.println("Error al calcular la clasificación general.");
             datosPantalla.setJsp("./error.jsp");
