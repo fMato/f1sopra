@@ -31,19 +31,7 @@ public class Conectar {
      * @throws java.sql.SQLException
      */
     public static Connection getConnection() throws NamingException, SQLException {
-        /*if (driver == null || protocol1 == null) {
-            throw new SQLException("Driver not specified.");
-        }*/
-        /*System.out.println("Nueva conexion");
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUser("root");
-        dataSource.setPassword("03885536");
-        dataSource.setDatabaseName("GeCoFuensa");
-        dataSource.setServerName("localhost");
 
-        Connection conexion = dataSource.getConnection();
-        return conexion;
-*/
 
         
         //System.out.println("Conector");
